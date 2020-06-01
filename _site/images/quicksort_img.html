@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="en-US" class="no-js">
+<head>
+<script type="text/javascript">
+/* <![CDATA[ */
+document.documentElement.className = document.documentElement.className.replace(new RegExp('(^|\\s)no-js(\\s|$)'), '$1js$2');
+/* ]]> */
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quicksort Algorithm - Techie Delight</title>
+
+<meta name="description" content="Quicksort is an efficient in-place sorting algorithm and can be about two or three times faster than its main competitors, merge sort &amp; heapsort when implemented well. Quicksort is a comparison sort, i.e. it can sort items of any type for which a less-than relation is defined. It takes on average O(nlog(n)) comparisons" />
+<meta name="robots" content="max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+<link rel="canonical" href="https://www.techiedelight.com/quicksort/" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Quicksort Algorithm - Techie Delight" />
+<meta property="og:description" content="Quicksort is an efficient in-place sorting algorithm and can be about two or three times faster than its main competitors, merge sort &amp; heapsort when implemented well. Quicksort is a comparison sort, i.e. it can sort items of any type for which a less-than relation is defined. It takes on average O(nlog(n)) comparisons" />
+<meta property="og:url" content="https://www.techiedelight.com/quicksort/" />
+<meta property="og:site_name" content="Techie Delight" />
+<meta property="article:publisher" content="https://www.facebook.com/techiedelight/" />
+<meta property="article:tag" content="Adobe" />
+<meta property="article:tag" content="Algorithm" />
+<meta property="article:tag" content="Intro" />
+<meta property="article:tag" content="Must Know" />
+<meta property="article:tag" content="Recursive" />
+<meta property="article:section" content="Sorting" />
+<meta property="article:published_time" content="2016-11-26T10:04:48+00:00" />
+<meta property="article:modified_time" content="2019-09-21T17:40:35+00:00" />
+<meta property="og:updated_time" content="2019-09-21T17:40:35+00:00" />
+<meta property="og:image" content="https://www.techiedelight.com/wp-content/uploads/Quicksort.png" />
+<meta property="og:image:secure_url" content="https://www.techiedelight.com/wp-content/uploads/Quicksort.png" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:description" content="Quicksort is an efficient in-place sorting algorithm and can be about two or three times faster than its main competitors, merge sort &amp; heapsort when implemented well. Quicksort is a comparison sort, i.e. it can sort items of any type for which a less-than relation is defined. It takes on average O(nlog(n)) comparisons" />
+<meta name="twitter:title" content="Quicksort Algorithm - Techie Delight" />
+<meta name="twitter:site" content="@techie_delight" />
+<meta name="twitter:image" content="https://www.techiedelight.com/wp-content/uploads/Quicksort.png" />
+<meta name="twitter:creator" content="@techie_delight" />
+<script type='application/ld+json' class='yoast-schema-graph yoast-schema-graph--main'>{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://www.techiedelight.com/#organization","name":"Techie Delight","url":"https://www.techiedelight.com/","sameAs":["https://www.facebook.com/techiedelight/","https://in.pinterest.com/techiedelight/","https://twitter.com/techie_delight"],"logo":{"@type":"ImageObject","@id":"https://www.techiedelight.com/#logo","url":"https://www.techiedelight.com/wp-content/uploads/Techie-Delight.jpg","width":366,"height":366,"caption":"Techie Delight"},"image":{"@id":"https://www.techiedelight.com/#logo"}},{"@type":"WebSite","@id":"https://www.techiedelight.com/#website","url":"https://www.techiedelight.com/","name":"Techie Delight","description":"Coding made easy","publisher":{"@id":"https://www.techiedelight.com/#organization"},"potentialAction":{"@type":"SearchAction","target":"https://www.techiedelight.com/?s={search_term_string}","query-input":"required name=search_term_string"}},{"@type":"ImageObject","@id":"https://www.techiedelight.com/quicksort/#primaryimage","url":"https://www.techiedelight.com/wp-content/uploads/Quicksort.png","width":577,"height":410},{"@type":"WebPage","@id":"https://www.techiedelight.com/quicksort/#webpage","url":"https://www.techiedelight.com/quicksort/","inLanguage":"en-US","name":"Quicksort Algorithm - Techie Delight","isPartOf":{"@id":"https://www.techiedelight.com/#website"},"primaryImageOfPage":{"@id":"https://www.techiedelight.com/quicksort/#primaryimage"},"datePublished":"2016-11-26T10:04:48+00:00","dateModified":"2019-09-21T17:40:35+00:00","description":"Quicksort is an efficient in-place\u00a0sorting algorithm and can be about two or three times faster than its main competitors, merge sort & heapsort when implemented well.\u00a0Quicksort is a comparison sort, i.e. it can sort items of any type for which a less-than relation is defined. It takes on average O(nlog(n)) comparisons"},{"@type":"Article","@id":"https://www.techiedelight.com/quicksort/#article","isPartOf":{"@id":"https://www.techiedelight.com/quicksort/#webpage"},"author":{"@id":"https://www.techiedelight.com/#/schema/person/67f768a62e6e60437d5f51aafe213826"},"headline":"Quicksort Algorithm","datePublished":"2016-11-26T10:04:48+00:00","dateModified":"2019-09-21T17:40:35+00:00","commentCount":"3","mainEntityOfPage":{"@id":"https://www.techiedelight.com/quicksort/#webpage"},"publisher":{"@id":"https://www.techiedelight.com/#organization"},"image":{"@id":"https://www.techiedelight.com/quicksort/#primaryimage"},"keywords":"Adobe,Algorithm,Intro,Must Know,Recursive","articleSection":"Array,Divide &amp; Conquer,Sorting"},{"@type":["Person"],"@id":"https://www.techiedelight.com/#/schema/person/67f768a62e6e60437d5f51aafe213826","name":"Admin","image":{"@type":"ImageObject","@id":"https://www.techiedelight.com/#authorlogo","url":"https://secure.gravatar.com/avatar/32fd0e5c28d6dbbaa262f30f3a33c727?s=96&d=wavatar&r=g","caption":"Admin"},"sameAs":[]}]}</script>
+
+<link rel='dns-prefetch' href='//ajax.googleapis.com' />
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Techie Delight &raquo; Feed" href="https://www.techiedelight.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Techie Delight &raquo; Comments Feed" href="https://www.techiedelight.com/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Techie Delight &raquo; Quicksort Algorithm Comments Feed" href="https://www.techiedelight.com/quicksort/feed/" />
+<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/12.0.0-1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/12.0.0-1\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/www.techiedelight.com\/wp-includes\/js\/wp-emoji-release.min.js"}};
+			!function(e,a,t){var r,n,o,i,p=a.createElement("canvas"),s=p.getContext&&p.getContext("2d");function c(e,t){var a=String.fromCharCode;s.clearRect(0,0,p.width,p.height),s.fillText(a.apply(this,e),0,0);var r=p.toDataURL();return s.clearRect(0,0,p.width,p.height),s.fillText(a.apply(this,t),0,0),r===p.toDataURL()}function l(e){if(!s||!s.fillText)return!1;switch(s.textBaseline="top",s.font="600 32px Arial",e){case"flag":return!c([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])&&(!c([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!c([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]));case"emoji":return!c([55357,56424,55356,57342,8205,55358,56605,8205,55357,56424,55356,57340],[55357,56424,55356,57342,8203,55358,56605,8203,55357,56424,55356,57340])}return!1}function d(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(i=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},o=0;o<i.length;o++)t.supports[i[o]]=l(i[o]),t.supports.everything=t.supports.everything&&t.supports[i[o]],"flag"!==i[o]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[i[o]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(r=t.source||{}).concatemoji?d(r.concatemoji):r.wpemoji&&r.twemoji&&(d(r.twemoji),d(r.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+<script>
+					advanced_ads_ready=function(){var fns=[],listener,doc=typeof document==="object"&&document,hack=doc&&doc.documentElement.doScroll,domContentLoaded="DOMContentLoaded",loaded=doc&&(hack?/^loaded|^c/:/^loaded|^i|^c/).test(doc.readyState);if(!loaded&&doc){listener=function(){doc.removeEventListener(domContentLoaded,listener);window.removeEventListener("load",listener);loaded=1;while(listener=fns.shift())listener()};doc.addEventListener(domContentLoaded,listener);window.addEventListener("load",listener)}return function(fn){loaded?setTimeout(fn,0):fns.push(fn)}}();
+			</script><style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='crayon-css' href='https://www.techiedelight.com/wp-content/plugins/crayon-syntax-highlighter/css/min/crayon.min.css' type='text/css' media='all' />
+<link rel='stylesheet' id='crayon-theme-familiar-css' href='https://www.techiedelight.com/wp-content/plugins/crayon-syntax-highlighter/themes/familiar/familiar.css' type='text/css' media='all' />
+<link rel='stylesheet' id='crayon-font-consolas-css' href='https://www.techiedelight.com/wp-content/plugins/crayon-syntax-highlighter/fonts/consolas.css' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-block-library-css' href='https://c0.wp.com/c/5.3.2/wp-includes/css/dist/block-library/style.min.css' type='text/css' media='all' />
+<style id='wp-block-library-inline-css' type='text/css'>
+.has-text-align-justify{text-align:justify;}
+</style>
+<link rel='stylesheet' id='wp-postratings-css' href='https://www.techiedelight.com/wp-content/plugins/wp-postratings/css/postratings-css.css' type='text/css' media='all' />
+<link rel='stylesheet' id='wpdiscuz-font-awesome-css' href='https://www.techiedelight.com/wp-content/plugins/wpdiscuz/assets/third-party/font-awesome-5.0.6/css/fontawesome-all.min.css' type='text/css' media='all' />
+<link rel='stylesheet' id='wpdiscuz-frontend-css-css' href='https://www.techiedelight.com/wp-content/plugins/wpdiscuz/assets/css/wpdiscuz.css' type='text/css' media='all' />
+<link rel='stylesheet' id='genericons-css' href='https://c0.wp.com/p/jetpack/8.3/_inc/genericons/genericons/genericons.css' type='text/css' media='all' />
+<link rel='stylesheet' id='nevertheless-style-css' href='https://www.techiedelight.com/wp-content/themes/nevertheless/assets/css/style.css' type='text/css' media='all' />
+<link rel='stylesheet' id='tamatebako-custom-fonts-css' href='//fonts.googleapis.com/css?family=Alegreya%3A400%2C400italic%2C700%2C700italic%7CLato%3A300%2C300italic%2C400%2C400italic%2C700%2C700italic%7CVollkorn%3A400%2C400italic%2C700%2C700italic%7COpen+Sans%3A300%2C300italic%2C400%2C400italic%2C700%2C700italic%2C800%2C800italic&#038;subset=latin%2Clatin-ext&#038;ver=9.3.5' type='text/css' media='all' />
+<link rel='stylesheet' id='social-logos-css' href='https://c0.wp.com/p/jetpack/8.3/_inc/social-logos/social-logos.min.css' type='text/css' media='all' />
+<link rel='stylesheet' id='jetpack_css-css' href='https://c0.wp.com/p/jetpack/8.3/css/jetpack.css' type='text/css' media='all' />
+<script type='text/javascript' src='//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js'></script>
+<script type='text/javascript' src='https://www.techiedelight.com/wp-content/plugins/wpdiscuz/assets/third-party/wpdcookiejs/customcookie.js'></script>
+<script type='text/javascript' src='https://www.techiedelight.com/wp-content/plugins/wpdiscuz/assets/third-party/autogrow/jquery.autogrowtextarea.min.js'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var wpdiscuzAjaxObj = {"url":"https:\/\/www.techiedelight.com\/wp-admin\/admin-ajax.php","wpdiscuz_options":{"wc_hide_replies_text":"Hide Replies","wc_show_replies_text":"View Replies","wc_msg_required_fields":"Please fill out required fields","wc_invalid_field":"Some of field value is invalid","wc_error_empty_text":"please fill out this field to comment","wc_error_url_text":"url is invalid","wc_error_email_text":"email address is invalid","wc_invalid_captcha":"Invalid Captcha Code","wc_login_to_vote":"You Must Be Logged In To Vote","wc_deny_voting_from_same_ip":"You are not allowed to vote for this comment","wc_self_vote":"You cannot vote for your comment","wc_vote_only_one_time":"You've already voted for this comment","wc_voting_error":"Voting Error","wc_held_for_moderate":"Comment awaiting moderation","wc_comment_edit_not_possible":"Sorry, this comment no longer possible to edit","wc_comment_not_updated":"Sorry, the comment was not updated","wc_comment_not_edited":"You've not made any changes","wc_new_comment_button_text":"new comment","wc_new_comments_button_text":"new comments","wc_new_reply_button_text":"new reply on your comment","wc_new_replies_button_text":"new replies on your comments","wc_msg_input_min_length":"Input is too short","wc_msg_input_max_length":"Input is too long","is_user_logged_in":false,"commentListLoadType":"0","commentListUpdateType":"0","commentListUpdateTimer":"30","liveUpdateGuests":"1","wc_comment_bg_color":"#FEFEFE","wc_reply_bg_color":"#F8F8F8","wordpress_comment_order":"asc","commentsVoteOrder":true,"wordpressThreadCommentsDepth":"4","wordpressIsPaginate":"","commentTextMaxLength":null,"storeCommenterData":100000,"isCaptchaInSession":false,"isGoodbyeCaptchaActive":false,"facebookAppID":"","cookiehash":"2c7421f192d21f1a9de0a89677700fd4","isLoadOnlyParentComments":0,"ahk":"","version":"9.0.7","wc_post_id":6917,"loadLastCommentId":0,"lastVisitKey":"wpdiscuz_last_visit","lastVisitExpires":1589682612,"lastVisitCookie":{"1":{"6917":1587090612}},"wc_captcha_show_for_guest":"0","wc_captcha_show_for_members":"0","is_email_field_required":1}};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.techiedelight.com/wp-content/plugins/wpdiscuz/assets/js/wpdiscuz.js'></script>
+<link rel='https://api.w.org/' href='https://www.techiedelight.com/wp-json/' />
+<meta name="generator" content="WordPress 5.3.2" />
+<link rel='shortlink' href='https://wp.me/p88NM0-1Nz' />
+<link rel="alternate" type="application/json+oembed" href="https://www.techiedelight.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.techiedelight.com%2Fquicksort%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://www.techiedelight.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.techiedelight.com%2Fquicksort%2F&#038;format=xml" />
+<style type="text/css">
+
+
+                #wpcomm .wc_new_comment{background:#00B38F;}
+                #wpcomm .wc_new_reply{background:#00B38F;}
+                #wpcomm .wc-form-wrapper{ background:none; } /* ->formBGColor */
+                #wpcomm .wpdiscuz-front-actions{background:#F9F9F9;}
+                #wpcomm .wpdiscuz-subscribe-bar{background:#F9F9F9;}
+
+                #wpcomm select,
+                #wpcomm input[type="text"],
+                #wpcomm input[type="email"],
+                #wpcomm input[type="url"],
+                #wpcomm input[type="date"],
+                #wpcomm input[type="color"]{border:#D9D9D9 1px solid;}
+
+                #wpcomm .wc-comment .wc-comment-right{background:#FEFEFE;}
+
+                #wpcomm .wc-reply .wc-comment-right{background:#F8F8F8;}
+
+                #wpcomm .wc-comment-right .wc-comment-text, 
+                #wpcomm .wc-comment-right .wc-comment-text *{
+                    font-size:14px;
+                }
+                #wpcomm .wc-blog-administrator > .wc-comment-right .wc-comment-author, #wpcomm .wc-blog-administrator > .wc-comment-right .wc-comment-author a{color:#00B38F;}#wpcomm .wc-blog-administrator > .wc-comment-left .wc-comment-label{color:#00B38F; border:none; border-bottom: 1px solid #dddddd; }#wpcomm .wc-blog-editor > .wc-comment-right .wc-comment-author, #wpcomm .wc-blog-editor > .wc-comment-right .wc-comment-author a{color:#00B38F;}#wpcomm .wc-blog-editor > .wc-comment-left .wc-comment-label{color:#00B38F; border:none; border-bottom: 1px solid #dddddd; }#wpcomm .wc-blog-author > .wc-comment-right .wc-comment-author, #wpcomm .wc-blog-author > .wc-comment-right .wc-comment-author a{color:#00B38F;}#wpcomm .wc-blog-author > .wc-comment-left .wc-comment-label{color:#00B38F; border:none; border-bottom: 1px solid #dddddd; }#wpcomm .wc-blog-contributor > .wc-comment-right .wc-comment-author, #wpcomm .wc-blog-contributor > .wc-comment-right .wc-comment-author a{color:#00B38F;}#wpcomm .wc-blog-contributor > .wc-comment-left .wc-comment-label{color:#00B38F; border:none; border-bottom: 1px solid #dddddd; }#wpcomm .wc-blog-subscriber > .wc-comment-right .wc-comment-author, #wpcomm .wc-blog-subscriber > .wc-comment-right .wc-comment-author a{color:#00B38F;}#wpcomm .wc-blog-subscriber > .wc-comment-left .wc-comment-label{color:#00B38F; border:none; border-bottom: 1px solid #dddddd; }#wpcomm .wc-blog-wpseo_manager > .wc-comment-right .wc-comment-author, #wpcomm .wc-blog-wpseo_manager > .wc-comment-right .wc-comment-author a{color:#00B38F;}#wpcomm .wc-blog-wpseo_manager > .wc-comment-left .wc-comment-label{color:#00B38F; border:none; border-bottom: 1px solid #dddddd; }#wpcomm .wc-blog-wpseo_editor > .wc-comment-right .wc-comment-author, #wpcomm .wc-blog-wpseo_editor > .wc-comment-right .wc-comment-author a{color:#00B38F;}#wpcomm .wc-blog-wpseo_editor > .wc-comment-left .wc-comment-label{color:#00B38F; border:none; border-bottom: 1px solid #dddddd; }#wpcomm .wc-blog-post_author > .wc-comment-right .wc-comment-author, #wpcomm .wc-blog-post_author > .wc-comment-right .wc-comment-author a{color:#00B38F;}#wpcomm .wc-blog-post_author > .wc-comment-left .wc-comment-label{color:#00B38F; border:none; border-bottom: 1px solid #dddddd; }#wpcomm .wc-blog-guest > .wc-comment-right .wc-comment-author, #wpcomm .wc-blog-guest > .wc-comment-right .wc-comment-author a{color:#00B38F;}#wpcomm .wc-blog-guest > .wc-comment-left .wc-comment-label{color:#00B38F; border:none; border-bottom: 1px solid #dddddd; }
+                #wpcomm .wc-comment .wc-comment-left .wc-comment-label{ background: #ffffff;}
+                #wpcomm .wc-load-more-submit{border:1px solid #D9D9D9;}
+                #wpcomm .wc-new-loaded-comment > .wc-comment-right{background:#FFFAD6;}
+                #wpcomm .wpdiscuz-subscribe-bar{color:#777;}
+                #wpcomm .wpdiscuz-front-actions .wpdiscuz-sbs-wrap span{color: #777;}
+                #wpcomm .page-numbers{color:#555;border:#555 1px solid;}
+                #wpcomm span.current{background:#555;}
+                #wpcomm .wpdiscuz-readmore{cursor:pointer;color:#00B38F;} 
+                #wpcomm .wpdiscuz-textarea-wrap{border:#D9D9D9 1px solid;} .wpd-custom-field .wcf-pasiv-star, #wpcomm .wpdiscuz-item .wpdiscuz-rating > label {color: #DDDDDD;}
+                #wpcomm .wpdiscuz-item .wpdiscuz-rating:not(:checked) > label:hover,.wpdiscuz-rating:not(:checked) > label:hover ~ label {   }#wpcomm .wpdiscuz-item .wpdiscuz-rating > input ~ label:hover, #wpcomm .wpdiscuz-item .wpdiscuz-rating > input:not(:checked) ~ label:hover ~ label, #wpcomm .wpdiscuz-item .wpdiscuz-rating > input:not(:checked) ~ label:hover ~ label{color: #FFED85;} 
+                #wpcomm .wpdiscuz-item .wpdiscuz-rating > input:checked ~ label:hover, #wpcomm .wpdiscuz-item .wpdiscuz-rating > input:checked ~ label:hover, #wpcomm .wpdiscuz-item .wpdiscuz-rating > label:hover ~ input:checked ~ label, #wpcomm .wpdiscuz-item .wpdiscuz-rating > input:checked + label:hover ~ label, #wpcomm .wpdiscuz-item .wpdiscuz-rating > input:checked ~ label:hover ~ label, .wpd-custom-field .wcf-activ-star, #wpcomm .wpdiscuz-item .wpdiscuz-rating > input:checked ~ label{ color:#FFD700;} 
+                #wpcomm .wc-comment-header{border-bottom: 1px solid #dedede;}
+                #wpcomm .wc-reply .wc-comment-header{border-bottom: 1px solid #DDDDDD;}
+
+                /* Buttons */
+                #wpcomm button, 
+                #wpcomm input[type="button"], 
+                #wpcomm input[type="reset"], 
+                #wpcomm input[type="submit"]{ border: 1px solid #555555; color: #FFFFFF; background-color: #555555; }
+                #wpcomm button:hover, 
+                #wpcomm button:focus,
+                #wpcomm input[type="button"]:hover, 
+                #wpcomm input[type="button"]:focus, 
+                #wpcomm input[type="reset"]:hover, 
+                #wpcomm input[type="reset"]:focus, 
+                #wpcomm input[type="submit"]:hover, 
+                #wpcomm input[type="submit"]:focus{ border: 1px solid #333333; background-color: #333333;  }
+                #wpcomm .wpdiscuz-sort-buttons{color:#777777;}
+                #wpcomm .wpdiscuz-sort-button{color:#777777; cursor:pointer;}
+                #wpcomm .wpdiscuz-sort-button:hover{color:#00B38F!important;cursor:pointer;}
+                #wpcomm .wpdiscuz-sort-button-active{color:#00B38F!important;cursor:default!important;}
+                #wpcomm .wc-cta-button, 
+                #wpcomm .wc-cta-button-x{color:#777777;  border-bottom: 1px solid #dddddd; }
+                #wpcomm .wc-vote-link.wc-up{color:#999999;}
+                #wpcomm .wc-vote-link.wc-down{color:#999999;}
+                #wpcomm .wc-vote-result{color:#999999;}
+                #wpcomm .wpf-cta{color:#999999; }
+                #wpcomm .wpf-cta:hover{background:#00B38F!important; color:#FFFFFF;}
+                #wpcomm .wc-cta-active{background:#00B38F!important; color:#FFFFFF;}
+                #wpcomm .wc-cta-button:hover{background:#00B38F!important; color:#FFFFFF;} 
+                #wpcomm .wc-footer-right .wc-toggle, 
+                #wpcomm .wc-footer-right .wc-toggle a, 
+                #wpcomm .wc-footer-right .wc-toggle i{color:#00B38F;}
+
+                /* STICKY COMMENT HEADER */
+                #wpcomm .wc-sticky-comment.wc-comment .wc-comment-header{background: #f2fcfb; border-bottom:1px dotted #00B38F;}
+                #wpcomm .wc-sticky-comment.wc-comment .wc-comment-header .wpd-sticky{color: #00B38F; border:1px dotted #00B38F;}
+                #wpcomm .wc-closed-comment.wc-comment .wc-comment-header .wpd-closed{color: #555555; border:1px dotted #555555;}
+
+                /* PRIVATE COMMENT HEADER */
+                #wpcomm .wc-private-comment.wc-comment .wc-comment-header{background: #eeeeee; border-bottom:1px solid #999999;}
+                #wpcomm .wc-private-comment.wc-comment .wc-comment-header .wpd-private{color: #000000; border:1px dotted #333333;}
+
+                                .comments-area{width:auto; margin: 0 auto;}
+            </style>
+<link rel='dns-prefetch' href='//v0.wordpress.com' />
+<link rel='dns-prefetch' href='//c0.wp.com' />
+<style type='text/css'>img#wpstats{display:none}</style>
+<style type="text/css" id="nevertheless-color-css">a,a:hover,a:focus{color:#006699}input[type="submit"]:hover,input[type="submit"]:focus,input[type="button"]:hover,input[type="button"]:focus,input[type="reset"]:hover,input[type="reset"]:focus,button:hover,button:focus,.button:hover,.button:focus{ border-color: #006699; background: #006699; }.archive-title:before{color:#006699}.entry-title a:hover,.entry-title a:focus{color:#006699}.more-link{color:#006699}.more-link:hover,.more-link:focus{border-color:#006699}.navigation.pagination a.page-numbers:hover,.navigation.pagination a.page-numbers:focus{border-color:#006699;background:#006699}.widget_recent_entries a:hover,.widget_recent_entries a:focus{color:#006699}.widget_rss li a.rsswidget:hover,.widget_rss li a.rsswidget:focus{color:#006699}#header{ background-color: #f7f7f7; }#site-title a,#site-title a:hover,#site-title a:focus{ color: #006699; }#site-description{ color: #4c4c4c; }#menu-primary .menu-container{ background-color: #778899; }#menu-primary-items > li > a{ background-color: #778899; }</style>
+<style type="text/css" id="tamatebako-custom-fonts-rules-css">#site-title{font-family:"Alegreya",serif;}#content .entry-title{font-family:"Lato",sans-serif;}.widget-title{font-family:"Vollkorn",serif;}body.wordpress,body#tinymce{font-family:"Open Sans",sans-serif;}</style>
+<style type="text/css" id="custom-background-css">
+body.custom-background { background-color: #dbdbdb; background-image: url("https://www.techiedelight.com/wp-content/uploads/background.png"); background-position: right top; background-size: auto; background-repeat: repeat-x; background-attachment: scroll; }
+</style>
+<style type="text/css">
+				/* If html does not have either class, do not show lazy loaded images. */
+				html:not( .jetpack-lazy-images-js-enabled ):not( .js ) .jetpack-lazy-image {
+					display: none;
+				}
+			</style>
+<script>
+				document.documentElement.classList.add(
+					'jetpack-lazy-images-js-enabled'
+				);
+			</script>
+<link rel="icon" href="https://www.techiedelight.com/wp-content/uploads/2016/11/cropped-td-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://www.techiedelight.com/wp-content/uploads/2016/11/cropped-td-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://www.techiedelight.com/wp-content/uploads/2016/11/cropped-td-180x180.png" />
+<meta name="msapplication-TileImage" content="https://www.techiedelight.com/wp-content/uploads/2016/11/cropped-td-270x270.png" />
+<style id="tamatebako-custom-css" type="text/css">
+code{color:#000;background-color:#f8f9fa;border:1px solid #eaecf0;border-radius:2px;padding:1px 4px}</style>
+</head>
+<body data-rsssl=1 class="post-template-default single single-post postid-6917 single-format-standard custom-background wordpress ltr parent-theme logged-out singular sidebar-primary-active menu-primary-active menu-social-links-active menu-footer-inactive wp-is-not-mobile theme-genericons-active layout-content-sidebar1 custom-fonts-active tf-font_site_title-alegreya tf-font_post_title-lato tf-font_widget_title-vollkorn tf-font_base-open-sans">
+<div id="container">
+<div class="skip-link">
+<a class="screen-reader-text" href="">Skip to content</a>
+</div>
+<div class="header-nav">
+<style>#_stickybox_ {
+	bottom: 45px !important;
+}</style>
+<header role="banner" id="header" style="background-image:url('');">
+<div id="branding">
+<p id="site-title" class="site-title"><a rel="home" href="https://www.techiedelight.com/">Techie Delight</a></p>
+<p id="site-description" class="site-description">Coding made easy</p>
+</div>
+<div id="social-links">
+<ul class="social-links"><li id="menu-item-37" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-37"><a target="_blank" rel="noopener noreferrer" href="https://twitter.com/techie_delight"><span class="screen-reader-text">Twitter</span></a></li>
+<li id="menu-item-38" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-38"><a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/techiedelight"><span class="screen-reader-text">Facebook</span></a></li>
+</ul> </div>
+</header>
+<nav role="navigation" class="menu" id="menu-primary">
+<div class="menu-container menu-dropdown menu-search">
+<div id="menu-toggle-primary" class="menu-toggle">
+<a class="menu-toggle-open" href="#menu-primary"><span class="menu-toggle-text screen-reader-text">Primary</span></a>
+<a class="menu-toggle-close" href="#menu-toggle-primary"><span class="menu-toggle-text screen-reader-text">Primary</span></a>
+</div>
+<div class="wrap"><ul id="menu-primary-items" class="menu-items"><li id="menu-item-7917" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7917"><a href="https://www.techiedelight.com/list-of-problems/">All Problems</a></li>
+<li id="menu-item-36" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-36"><a href="https://www.techiedelight.com/Category/array/">Array</a></li>
+<li id="menu-item-21155" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-21155"><a href="https://www.techiedelight.com/Category/trees/">Tree</a>
+<ul class="sub-menu">
+<li id="menu-item-9022" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-9022"><a href="https://www.techiedelight.com/Category/trees/binary-tree/">Binary Tree</a></li>
+<li id="menu-item-9021" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-9021"><a href="https://www.techiedelight.com/Category/trees/bst/">BST</a></li>
+<li id="menu-item-21157" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-21157"><a href="https://www.techiedelight.com/Category/trees/trie/">Trie</a></li>
+</ul>
+</li>
+<li id="menu-item-35" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-35"><a href="https://www.techiedelight.com/Category/linked-list/">Linked List</a></li>
+<li id="menu-item-53" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-53"><a href="https://www.techiedelight.com/Category/dynamic-programming/">DP</a></li>
+<li id="menu-item-44" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-44"><a href="https://www.techiedelight.com/Category/graphs/">Graph</a></li>
+<li id="menu-item-46" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-46"><a href="https://www.techiedelight.com/Category/backtracking/">Backtracking</a></li>
+<li id="menu-item-48" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-48"><a href="https://www.techiedelight.com/Category/matrix/">Matrix</a></li>
+<li id="menu-item-50" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-50"><a href="https://www.techiedelight.com/Category/heap/">Heap</a></li>
+<li id="menu-item-49" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-49"><a href="https://www.techiedelight.com/Category/divide-conquer/">D&#038;C</a></li>
+<li id="menu-item-52" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-52"><a href="https://www.techiedelight.com/Category/string/">String</a></li>
+<li id="menu-item-47" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-47"><a href="https://www.techiedelight.com/Category/sorting/">Sorting</a></li>
+<li id="menu-item-41" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-41"><a href="https://www.techiedelight.com/Category/stack/">Stack</a></li>
+<li id="menu-item-9279" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-9279"><a href="https://www.techiedelight.com/Category/queue/">Queue</a></li>
+<li id="menu-item-9283" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-9283"><a href="https://www.techiedelight.com/Category/binary/">Binary</a></li>
+<li id="menu-item-18671" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-18671"><a href="https://www.techiedelight.com/Category/puzzles/">Puzzles</a></li>
+<li id="menu-item-18696" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-18696"><a href="https://techiedelight.com/compiler/">IDE</a></li>
+</ul></div>
+<form role="search" method="get" class="search-form" action="https://www.techiedelight.com/">
+<a href="#search-menu" class="search-toggle"><span class="screen-reader-text">Expand Search Form</span></a>
+<input id="search-menu" type="search" class="search-field" placeholder="Search&hellip;" value="" name="s" />
+<button class="search-submit button"><span class="screen-reader-text">Search</span></button>
+</form>
+</div>
+</nav>
+</div>
+<div class="wrap">
+<div id="main">
+<div class="wrap">
+<main id="content" class="content" role="main">
+<div class="wrap">
+<article id="post-6917" class="post-6917 post type-post status-publish format-standard hentry category-array category-divide-conquer category-sorting tag-adobe tag-algorithm tag-intro tag-must-know tag-recursion entry">
+<div class="wrap">
+<header class="entry-header">
+<h1 class="entry-title">Quicksort Algorithm</h1>
+</header>
+<div class="entry-content">
+<div style="color: #000000; font-size:14px;"> 
+<p style="color: #008200;font-size:16px">Given an array of integers, sort it using quicksort algorithm.</p>
+<p><span id="more-6917"></span><br>
+ </p>
+<p>Quicksort is an efficient in-place sorting algorithm, which usually performs about two to three times faster than <a href="https://www.techiedelight.com/merge-sort/" target="_blank">merge sort</a> and <a href="https://www.techiedelight.com/heap-sort-place-place-implementation-c-c/" target="_blank">heapsort</a> when implemented well. Quicksort is a comparison sort, meaning that it can sort items of any type for which a <em>less-than</em> relation is defined. In efficient implementations, it is usually not a stable sort.</p>
+<p>Quicksort on average takes <span style="color: green; font-family: consolas; font-size: medium;">O(nlog(n))</span> comparisons to sort n items. In the worst case, it makes <span style="color: red; font-family: consolas; font-size: medium;">O(n<sup>2</sup>)</span> comparisons, though this behavior is very rare.</p>
+<p> </p>
+<h2>How Quicksort works?</h2>
+<p>Quicksort is a <a href="https://www.techiedelight.com/divide-and-conquer-interview-questions/" target="_blank">divide and conquer</a> algorithm. Like all divide and conquer algorithms, it first divides a large array into two smaller sub-arrays and then recursively sort the sub-arrays. Basically, three steps are involved in whole process –</p>
+<ul><li><strong>Pivot selection: </strong><em>Pick an element, called a pivot, from the array (usually the leftmost or the rightmost element of the partition).</em><br>
+ </li>
+<li><strong>Partitioning: </strong><em>Reorder the array so that all elements with values less than the pivot come before the pivot, while all elements with values greater than the pivot come after it (equal values can go either way). After this partitioning,</em><em> the pivot is in its final position.</em><br>
+ </li>
+<li><strong>Recur: </strong><em>Recursively apply the above steps to the sub-array of elements with smaller values than pivot and separately to the sub-array of elements with greater values than pivot.</em><br>
+ </li>
+</ul><p>The base case of the recursion is arrays of size 1, which never need to be sorted.</p>
+<p>Below diagram shows how at each step of the quicksort algorithm we choose leftmost element as pivot, partition the array across pivot and recur on two sub-arrays we get after partition process.</p>
+<p><img src="https://www.techiedelight.com/wp-content/uploads/Quicksort.png" alt="quicksort" data-lazy-src="https://www.techiedelight.com/wp-content/uploads/Quicksort.png?is-pending-load=1" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" class=" jetpack-lazy-image"><noscript><img src="https://www.techiedelight.com/wp-content/uploads/Quicksort.png" alt="quicksort"></noscript><br>
+ </p>
+<p> <br>
+Please note that the pivot selection and partitioning steps can be done in several different ways and the choice of specific implementation schemes greatly affects the algorithm’s performance. We will discuss all that in detail later, but let’s now get to the coding part.</p>
+<p>Below is C++, Java and Python implementation of quicksort algorithm –</p>
+<p></p><div class="responsive-tabs">
+<h2 class="tabtitle"><tt>C++</tt></h2>
+<div class="tabcontent">
+
+<div id="crayon-5e98c75c2b5d6868030312" class="crayon-syntax crayon-theme-familiar crayon-font-consolas crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 14px !important; line-height: 17px !important;">
+<div class="crayon-toolbar" data-settings=" show" style="font-size: 14px !important;height: 21px !important; line-height: 21px !important;"><span class="crayon-title"></span>
+<div class="crayon-tools" style="font-size: 14px !important;height: 21px !important; line-height: 21px !important;"><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div></div></div>
+<div class="crayon-info" style="min-height: 19.6px !important; line-height: 19.6px !important;"></div>
+<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 14px !important; line-height: 17px !important;">
+#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+
+// Partition using Lomuto partition scheme
+int Partition(int a[], int start, int end)
+{
+	// Pick rightmost element as pivot from the array
+	int pivot = a[end];
+
+	// elements less than pivot will be pushed to the left of pIndex
+	// elements more than pivot will be pushed to the right of pIndex
+	// equal elements can go either way
+	int pIndex = start;
+
+	// each time we finds an element less than or equal to pivot, pIndex
+	// is incremented and that element would be placed before the pivot.
+	for (int i = start; i &lt; end; i++)
+	{
+		if (a[i] &lt;= pivot)
+		{
+			swap(a[i], a[pIndex]);
+			pIndex++;
+		}
+	}
+	// swap pIndex with Pivot
+	swap (a[pIndex], a[end]);
+
+	// return pIndex (index of pivot element)
+	return pIndex;
+}
+
+// Quicksort routine
+void quicksort(int a[] ,int start, int end)
+{
+	// base condition
+	if (start &gt;= end)
+		return;
+
+	// rearrange the elements across pivot
+	int pivot = Partition(a, start, end);
+
+	// recur on sub-array containing elements that are less than pivot
+	quicksort(a, start, pivot - 1);
+
+	// recur on sub-array containing elements that are more than pivot
+	quicksort(a, pivot + 1, end);
+}
+
+// C++ implementation of quicksort algorithm
+int main()
+{
+	int a[] = { 9, -3, 5, 2, 6, 8, -6, 1, 3 };
+	int n = sizeof(a)/sizeof(a[0]);
+
+	quicksort(a, 0, n - 1);
+
+	// print the sorted array
+	for (int i = 0 ; i &lt; n; i++)
+		cout &lt;&lt; a[i] &lt;&lt; " ";
+
+	return 0;
+}</textarea></div>
+<div class="crayon-main" style="">
+<table class="crayon-table"><tr class="crayon-row"><td class="crayon-nums " data-settings="show">
+<div class="crayon-nums-content" style="font-size: 14px !important; line-height: 17px !important;"><div class="crayon-num" data-line="crayon-5e98c75c2b5d6868030312-1">1</div><div class="crayon-num" data-line="crayon-5e98c75c2b5d6868030312-2">2</div><div class="crayon-num" data-line="crayon-5e98c75c2b5d6868030312-3">3</div><div class="crayon-num" data-line="crayon-5e98c75c2b5d6868030312-4">4</div><div class="crayon-num" data-line="crayon-5e98c75c2b5d6868030312-5">5</div><div class="crayon-num" data-line="crayon-5e98c75c2b5d6868030312-6">6</div><div class="crayon-num" data-line="crayon-5e98c75c2b5d6868030312-7">7</div><div class="crayon-num" data-line="crayon-5e98c75c2b5d6868030312-8">8</div><div class="crayon-num" data-line="crayon-5e98c75c2b5d6868030312-9">9</div><div class="crayon-num" data-line="crayon-5e98c75c2b5d6868030312-10">10</div><div class="crayon-num" data-line="crayon-5e98c75c2b5d6868030312-11">11</div><div class="crayon-num" data-line="crayon-5e98c75c2b5d6868030312-12">12</div><div class="crayon-num" data-line="crayon-5e98c75c2b5d6868030312-13">13</div><div class="crayon-num" data-line="crayon-5e98c75c2b5d6868030312-14">14</div><div class="crayon-num" data-line="crayon-5e98c75c2b5d6868030312-15">15</div><div class="crayon-num" data-line="crayon-5e98c75c2b5d6868030312-16">16</div><div class="crayon-num" data-line="crayon-5e98c75c2b5d6868030312-17">17</div><div class="crayon-num" data-line="crayon-5e98c75c2b5d6868030312-18">18</div><div class="crayon-num" data-line="crayon-5e98c75c2b5d6868030312-19">19</div><div class="crayon-num" data-line="crayon-5e98c75c2b5d6868030312-20">20</div><div class="crayon-num" data-line="crayon-5e98c75c2b5d6868030312-21">21</div><div class="crayon-num" data-line="crayon-5e98c75c2b5d6868030312-22">22</div><div class="crayon-num" data-line="crayon-5e98c75c2b5d6868030312-23">23</div><div class="crayon-num" data-line="crayon-5e98c75c2b5d6868030312-24">24</div><div class="crayon-num" data-line="crayon-5e98c75c2b5d6868030312-25">25</div><div class="crayon-num" data-line="crayon-5e98c75c2b5d6868030312-26">26</div><div class="crayon-num" data-line="crayon-5e98c75c2b5d6868030312-27">27</div><div class="crayon-num" data-line="crayon-5e98c75c2b5d6868030312-28">28</div><div class="crayon-num" data-line="crayon-5e98c75c2b5d6868030312-29">29</div><div class="crayon-num" data-line="crayon-5e98c75c2b5d6868030312-30">30</div><div class="crayon-num" data-line="crayon-5e98c75c2b5d6868030312-31">31</div><div class="crayon-num" data-line="crayon-5e98c75c2b5d6868030312-32">32</div><div class="crayon-num" data-line="crayon-5e98c75c2b5d6868030312-33">33</div><div class="crayon-num" data-line="crayon-5e98c75c2b5d6868030312-34">34</div><div class="crayon-num" data-line="crayon-5e98c75c2b5d6868030312-35">35</div><div class="crayon-num" data-line="crayon-5e98c75c2b5d6868030312-36">36</div><div class="crayon-num" data-line="crayon-5e98c75c2b5d6868030312-37">37</div><div class="crayon-num" data-line="crayon-5e98c75c2b5d6868030312-38">38</div><div class="crayon-num" data-line="crayon-5e98c75c2b5d6868030312-39">39</div><div class="crayon-num" data-line="crayon-5e98c75c2b5d6868030312-40">40</div><div class="crayon-num" data-line="crayon-5e98c75c2b5d6868030312-41">41</div><div class="crayon-num" data-line="crayon-5e98c75c2b5d6868030312-42">42</div><div class="crayon-num" data-line="crayon-5e98c75c2b5d6868030312-43">43</div><div class="crayon-num" data-line="crayon-5e98c75c2b5d6868030312-44">44</div><div class="crayon-num" data-line="crayon-5e98c75c2b5d6868030312-45">45</div><div class="crayon-num" data-line="crayon-5e98c75c2b5d6868030312-46">46</div><div class="crayon-num" data-line="crayon-5e98c75c2b5d6868030312-47">47</div><div class="crayon-num" data-line="crayon-5e98c75c2b5d6868030312-48">48</div><div class="crayon-num" data-line="crayon-5e98c75c2b5d6868030312-49">49</div><div class="crayon-num" data-line="crayon-5e98c75c2b5d6868030312-50">50</div><div class="crayon-num" data-line="crayon-5e98c75c2b5d6868030312-51">51</div><div class="crayon-num" data-line="crayon-5e98c75c2b5d6868030312-52">52</div><div class="crayon-num" data-line="crayon-5e98c75c2b5d6868030312-53">53</div><div class="crayon-num" data-line="crayon-5e98c75c2b5d6868030312-54">54</div><div class="crayon-num" data-line="crayon-5e98c75c2b5d6868030312-55">55</div><div class="crayon-num" data-line="crayon-5e98c75c2b5d6868030312-56">56</div><div class="crayon-num" data-line="crayon-5e98c75c2b5d6868030312-57">57</div><div class="crayon-num" data-line="crayon-5e98c75c2b5d6868030312-58">58</div><div class="crayon-num" data-line="crayon-5e98c75c2b5d6868030312-59">59</div><div class="crayon-num" data-line="crayon-5e98c75c2b5d6868030312-60">60</div><div class="crayon-num" data-line="crayon-5e98c75c2b5d6868030312-61">61</div><div class="crayon-num" data-line="crayon-5e98c75c2b5d6868030312-62">62</div><div class="crayon-num" data-line="crayon-5e98c75c2b5d6868030312-63">63</div></div>
+</td>
+<td class="crayon-code"><div class="crayon-pre" style="font-size: 14px !important; line-height: 17px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5e98c75c2b5d6868030312-1"><span class="crayon-p">#include &lt;iostream&gt;</span></div><div class="crayon-line" id="crayon-5e98c75c2b5d6868030312-2"><span class="crayon-p">#include &lt;algorithm&gt;</span></div><div class="crayon-line" id="crayon-5e98c75c2b5d6868030312-3"><span class="crayon-r">using</span><span class="crayon-h"> </span><span class="crayon-t">namespace</span><span class="crayon-h"> </span><span class="crayon-v">std</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5e98c75c2b5d6868030312-4"> </div><div class="crayon-line" id="crayon-5e98c75c2b5d6868030312-5"><span class="crayon-c">// Partition using Lomuto partition scheme</span></div><div class="crayon-line" id="crayon-5e98c75c2b5d6868030312-6"><span class="crayon-t">int</span><span class="crayon-h"> </span><span class="crayon-e">Partition</span><span class="crayon-sy">(</span><span class="crayon-t">int</span><span class="crayon-h"> </span><span class="crayon-v">a</span><span class="crayon-sy">[</span><span class="crayon-sy">]</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-t">int</span><span class="crayon-h"> </span><span class="crayon-v">start</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-t">int</span><span class="crayon-h"> </span><span class="crayon-st">end</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5e98c75c2b5d6868030312-7"><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-5e98c75c2b5d6868030312-8"><span class="crayon-h">    </span><span class="crayon-c">// Pick rightmost element as pivot from the array</span></div><div class="crayon-line" id="crayon-5e98c75c2b5d6868030312-9"><span class="crayon-h">    </span><span class="crayon-t">int</span><span class="crayon-h"> </span><span class="crayon-v">pivot</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">a</span><span class="crayon-sy">[</span><span class="crayon-st">end</span><span class="crayon-sy">]</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5e98c75c2b5d6868030312-10"> </div><div class="crayon-line" id="crayon-5e98c75c2b5d6868030312-11"><span class="crayon-h">    </span><span class="crayon-c">// elements less than pivot will be pushed to the left of pIndex</span></div><div class="crayon-line" id="crayon-5e98c75c2b5d6868030312-12"><span class="crayon-h">    </span><span class="crayon-c">// elements more than pivot will be pushed to the right of pIndex</span></div><div class="crayon-line" id="crayon-5e98c75c2b5d6868030312-13"><span class="crayon-h">    </span><span class="crayon-c">// equal elements can go either way</span></div><div class="crayon-line" id="crayon-5e98c75c2b5d6868030312-14"><span class="crayon-h">    </span><span class="crayon-t">int</span><span class="crayon-h"> </span><span class="crayon-v">pIndex</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">start</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5e98c75c2b5d6868030312-15"> </div><div class="crayon-line" id="crayon-5e98c75c2b5d6868030312-16"><span class="crayon-h">    </span><span class="crayon-c">// each time we finds an element less than or equal to pivot, pIndex</span></div><div class="crayon-line" id="crayon-5e98c75c2b5d6868030312-17"><span class="crayon-h">    </span><span class="crayon-c">// is incremented and that element would be placed before the pivot.</span></div><div class="crayon-line" id="crayon-5e98c75c2b5d6868030312-18"><span class="crayon-h">    </span><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-t">int</span><span class="crayon-h"> </span><span class="crayon-v">i</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">start</span><span class="crayon-sy">;</span><span class="crayon-h"> </span><span class="crayon-v">i</span><span class="crayon-h"> </span><span class="crayon-o">&lt;</span><span class="crayon-h"> </span><span class="crayon-st">end</span><span class="crayon-sy">;</span><span class="crayon-h"> </span><span class="crayon-v">i</span><span class="crayon-o">++</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5e98c75c2b5d6868030312-19"><span class="crayon-h">    </span><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-5e98c75c2b5d6868030312-20"><span class="crayon-h">        </span><span class="crayon-st">if</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-v">a</span><span class="crayon-sy">[</span><span class="crayon-v">i</span><span class="crayon-sy">]</span><span class="crayon-h"> </span><span class="crayon-o">&lt;=</span><span class="crayon-h"> </span><span class="crayon-v">pivot</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5e98c75c2b5d6868030312-21"><span class="crayon-h">        </span><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-5e98c75c2b5d6868030312-22"><span class="crayon-h">            </span><span class="crayon-e">swap</span><span class="crayon-sy">(</span><span class="crayon-v">a</span><span class="crayon-sy">[</span><span class="crayon-v">i</span><span class="crayon-sy">]</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">a</span><span class="crayon-sy">[</span><span class="crayon-v">pIndex</span><span class="crayon-sy">]</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5e98c75c2b5d6868030312-23"><span class="crayon-h">            </span><span class="crayon-v">pIndex</span><span class="crayon-o">++</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5e98c75c2b5d6868030312-24"><span class="crayon-h">        </span><span class="crayon-sy">}</span></div><div class="crayon-line" id="crayon-5e98c75c2b5d6868030312-25"><span class="crayon-h">    </span><span class="crayon-sy">}</span></div><div class="crayon-line" id="crayon-5e98c75c2b5d6868030312-26"><span class="crayon-h">    </span><span class="crayon-c">// swap pIndex with Pivot</span></div><div class="crayon-line" id="crayon-5e98c75c2b5d6868030312-27"><span class="crayon-h">    </span><span class="crayon-e">swap</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-v">a</span><span class="crayon-sy">[</span><span class="crayon-v">pIndex</span><span class="crayon-sy">]</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">a</span><span class="crayon-sy">[</span><span class="crayon-st">end</span><span class="crayon-sy">]</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5e98c75c2b5d6868030312-28"> </div><div class="crayon-line" id="crayon-5e98c75c2b5d6868030312-29"><span class="crayon-h">    </span><span class="crayon-c">// return pIndex (index of pivot element)</span></div><div class="crayon-line" id="crayon-5e98c75c2b5d6868030312-30"><span class="crayon-h">    </span><span class="crayon-st">return</span><span class="crayon-h"> </span><span class="crayon-v">pIndex</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5e98c75c2b5d6868030312-31"><span class="crayon-sy">}</span></div><div class="crayon-line" id="crayon-5e98c75c2b5d6868030312-32"> </div><div class="crayon-line" id="crayon-5e98c75c2b5d6868030312-33"><span class="crayon-c">// Quicksort routine</span></div><div class="crayon-line" id="crayon-5e98c75c2b5d6868030312-34"><span class="crayon-t">void</span><span class="crayon-h"> </span><span class="crayon-e">quicksort</span><span class="crayon-sy">(</span><span class="crayon-t">int</span><span class="crayon-h"> </span><span class="crayon-v">a</span><span class="crayon-sy">[</span><span class="crayon-sy">]</span><span class="crayon-h"> </span><span class="crayon-sy">,</span><span class="crayon-t">int</span><span class="crayon-h"> </span><span class="crayon-v">start</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-t">int</span><span class="crayon-h"> </span><span class="crayon-st">end</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5e98c75c2b5d6868030312-35"><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-5e98c75c2b5d6868030312-36"><span class="crayon-h">    </span><span class="crayon-c">// base condition</span></div><div class="crayon-line" id="crayon-5e98c75c2b5d6868030312-37"><span class="crayon-h">    </span><span class="crayon-st">if</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-v">start</span><span class="crayon-h"> </span><span class="crayon-o">&gt;=</span><span class="crayon-h"> </span><span class="crayon-st">end</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5e98c75c2b5d6868030312-38"><span class="crayon-h">        </span><span class="crayon-st">return</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5e98c75c2b5d6868030312-39"> </div><div class="crayon-line" id="crayon-5e98c75c2b5d6868030312-40"><span class="crayon-h">    </span><span class="crayon-c">// rearrange the elements across pivot</span></div><div class="crayon-line" id="crayon-5e98c75c2b5d6868030312-41"><span class="crayon-h">    </span><span class="crayon-t">int</span><span class="crayon-h"> </span><span class="crayon-v">pivot</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-e">Partition</span><span class="crayon-sy">(</span><span class="crayon-v">a</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">start</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-st">end</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5e98c75c2b5d6868030312-42"> </div><div class="crayon-line" id="crayon-5e98c75c2b5d6868030312-43"><span class="crayon-h">    </span><span class="crayon-c">// recur on sub-array containing elements that are less than pivot</span></div><div class="crayon-line" id="crayon-5e98c75c2b5d6868030312-44"><span class="crayon-h">    </span><span class="crayon-e">quicksort</span><span class="crayon-sy">(</span><span class="crayon-v">a</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">start</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">pivot</span><span class="crayon-h"> </span><span class="crayon-o">-</span><span class="crayon-h"> </span><span class="crayon-cn">1</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5e98c75c2b5d6868030312-45"> </div><div class="crayon-line" id="crayon-5e98c75c2b5d6868030312-46"><span class="crayon-h">    </span><span class="crayon-c">// recur on sub-array containing elements that are more than pivot</span></div><div class="crayon-line" id="crayon-5e98c75c2b5d6868030312-47"><span class="crayon-h">    </span><span class="crayon-e">quicksort</span><span class="crayon-sy">(</span><span class="crayon-v">a</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">pivot</span><span class="crayon-h"> </span><span class="crayon-o">+</span><span class="crayon-h"> </span><span class="crayon-cn">1</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-st">end</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5e98c75c2b5d6868030312-48"><span class="crayon-sy">}</span></div><div class="crayon-line" id="crayon-5e98c75c2b5d6868030312-49"> </div><div class="crayon-line" id="crayon-5e98c75c2b5d6868030312-50"><span class="crayon-c">// C++ implementation of quicksort algorithm</span></div><div class="crayon-line" id="crayon-5e98c75c2b5d6868030312-51"><span class="crayon-t">int</span><span class="crayon-h"> </span><span class="crayon-e">main</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5e98c75c2b5d6868030312-52"><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-5e98c75c2b5d6868030312-53"><span class="crayon-h">    </span><span class="crayon-t">int</span><span class="crayon-h"> </span><span class="crayon-v">a</span><span class="crayon-sy">[</span><span class="crayon-sy">]</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-sy">{</span><span class="crayon-h"> </span><span class="crayon-cn">9</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-o">-</span><span class="crayon-cn">3</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">5</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">2</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">6</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">8</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-o">-</span><span class="crayon-cn">6</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">1</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">3</span><span class="crayon-h"> </span><span class="crayon-sy">}</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5e98c75c2b5d6868030312-54"><span class="crayon-h">    </span><span class="crayon-t">int</span><span class="crayon-h"> </span><span class="crayon-v">n</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-r">sizeof</span><span class="crayon-sy">(</span><span class="crayon-v">a</span><span class="crayon-sy">)</span><span class="crayon-o">/</span><span class="crayon-r">sizeof</span><span class="crayon-sy">(</span><span class="crayon-v">a</span><span class="crayon-sy">[</span><span class="crayon-cn">0</span><span class="crayon-sy">]</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5e98c75c2b5d6868030312-55"> </div><div class="crayon-line" id="crayon-5e98c75c2b5d6868030312-56"><span class="crayon-h">    </span><span class="crayon-e">quicksort</span><span class="crayon-sy">(</span><span class="crayon-v">a</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">0</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">n</span><span class="crayon-h"> </span><span class="crayon-o">-</span><span class="crayon-h"> </span><span class="crayon-cn">1</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5e98c75c2b5d6868030312-57"> </div><div class="crayon-line" id="crayon-5e98c75c2b5d6868030312-58"><span class="crayon-h">    </span><span class="crayon-c">// print the sorted array</span></div><div class="crayon-line" id="crayon-5e98c75c2b5d6868030312-59"><span class="crayon-h">    </span><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-t">int</span><span class="crayon-h"> </span><span class="crayon-v">i</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-cn">0</span><span class="crayon-h"> </span><span class="crayon-sy">;</span><span class="crayon-h"> </span><span class="crayon-v">i</span><span class="crayon-h"> </span><span class="crayon-o">&lt;</span><span class="crayon-h"> </span><span class="crayon-v">n</span><span class="crayon-sy">;</span><span class="crayon-h"> </span><span class="crayon-v">i</span><span class="crayon-o">++</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5e98c75c2b5d6868030312-60"><span class="crayon-h">        </span><span class="crayon-r">cout</span><span class="crayon-h"> </span><span class="crayon-o">&lt;&lt;</span><span class="crayon-h"> </span><span class="crayon-v">a</span><span class="crayon-sy">[</span><span class="crayon-v">i</span><span class="crayon-sy">]</span><span class="crayon-h"> </span><span class="crayon-o">&lt;&lt;</span><span class="crayon-h"> </span><span class="crayon-s">" "</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5e98c75c2b5d6868030312-61"> </div><div class="crayon-line" id="crayon-5e98c75c2b5d6868030312-62"><span class="crayon-h">    </span><span class="crayon-st">return</span><span class="crayon-h"> </span><span class="crayon-cn">0</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5e98c75c2b5d6868030312-63"><span class="crayon-sy">}</span></div></div></td>
+</tr></table></div>
+</div>
+
+<p></p>
+<p style="text-align: justify; padding-left: 70%;"><span style="color: #ff0000;"><a style="color: #006400;" href="https://www.techiedelight.com/code/XXqxMa" target="_blank" download="main.cpp">Download</a>   <a style="color: #ff0000;" href="https://techiedelight.com/compiler/?run=XXqxMa" target="_blank">Run Code</a></span></p>
+<p>
+</p></div><h2 class="tabtitle"><tt>Java</tt></h2>
+<div class="tabcontent">
+
+<div id="crayon-5e98c75c2b5e3918098682" class="crayon-syntax crayon-theme-familiar crayon-font-consolas crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 14px !important; line-height: 17px !important;">
+<div class="crayon-toolbar" data-settings=" show" style="font-size: 14px !important;height: 21px !important; line-height: 21px !important;"><span class="crayon-title"></span>
+<div class="crayon-tools" style="font-size: 14px !important;height: 21px !important; line-height: 21px !important;"><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div></div></div>
+<div class="crayon-info" style="min-height: 19.6px !important; line-height: 19.6px !important;"></div>
+<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 14px !important; line-height: 17px !important;">
+import java.util.Arrays;
+
+class QuickSort
+{
+	public static void swap (int[] arr, int i, int j) {
+		int temp = arr[i];
+		arr[i] = arr[j];
+		arr[j] = temp;
+	}
+
+	// Partition using Lomuto partition scheme
+	public static int partition(int[] a, int start, int end)
+	{
+		// Pick rightmost element as pivot from the array
+		int pivot = a[end];
+
+		// elements less than pivot will be pushed to the left of pIndex
+		// elements more than pivot will be pushed to the right of pIndex
+		// equal elements can go either way
+		int pIndex = start;
+
+		// each time we finds an element less than or equal to pivot,
+		// pIndex is incremented and that element would be placed 
+		// before the pivot.
+		for (int i = start; i &lt; end; i++)
+		{
+			if (a[i] &lt;= pivot) {
+				swap(a, i, pIndex);
+				pIndex++;
+			}
+		}
+
+		// swap pIndex with Pivot
+		swap(a, end, pIndex);
+
+		// return pIndex (index of pivot element)
+		return pIndex;
+	}
+
+	// Quicksort routine
+	public static void quicksort(int[] a ,int start, int end)
+	{
+		// base condition
+		if (start &gt;= end) {
+			return;
+		}
+
+		// rearrange the elements across pivot
+		int pivot = partition(a, start, end);
+
+		// recur on sub-array containing elements less than pivot
+		quicksort(a, start, pivot - 1);
+
+		// recur on sub-array containing elements more than pivot
+		quicksort(a, pivot + 1, end);
+	}
+
+	// Java implementation of quicksort algorithm
+	public static void main(String[] args)
+	{
+		int a[] = { 9, -3, 5, 2, 6, 8, -6, 1, 3 };
+
+		quicksort(a, 0, a.length - 1);
+
+		// print the sorted array
+		System.out.println(Arrays.toString(a));
+	}
+}</textarea></div>
+<div class="crayon-main" style="">
+<table class="crayon-table"><tr class="crayon-row"><td class="crayon-nums " data-settings="show">
+<div class="crayon-nums-content" style="font-size: 14px !important; line-height: 17px !important;"><div class="crayon-num" data-line="crayon-5e98c75c2b5e3918098682-1">1</div><div class="crayon-num" data-line="crayon-5e98c75c2b5e3918098682-2">2</div><div class="crayon-num" data-line="crayon-5e98c75c2b5e3918098682-3">3</div><div class="crayon-num" data-line="crayon-5e98c75c2b5e3918098682-4">4</div><div class="crayon-num" data-line="crayon-5e98c75c2b5e3918098682-5">5</div><div class="crayon-num" data-line="crayon-5e98c75c2b5e3918098682-6">6</div><div class="crayon-num" data-line="crayon-5e98c75c2b5e3918098682-7">7</div><div class="crayon-num" data-line="crayon-5e98c75c2b5e3918098682-8">8</div><div class="crayon-num" data-line="crayon-5e98c75c2b5e3918098682-9">9</div><div class="crayon-num" data-line="crayon-5e98c75c2b5e3918098682-10">10</div><div class="crayon-num" data-line="crayon-5e98c75c2b5e3918098682-11">11</div><div class="crayon-num" data-line="crayon-5e98c75c2b5e3918098682-12">12</div><div class="crayon-num" data-line="crayon-5e98c75c2b5e3918098682-13">13</div><div class="crayon-num" data-line="crayon-5e98c75c2b5e3918098682-14">14</div><div class="crayon-num" data-line="crayon-5e98c75c2b5e3918098682-15">15</div><div class="crayon-num" data-line="crayon-5e98c75c2b5e3918098682-16">16</div><div class="crayon-num" data-line="crayon-5e98c75c2b5e3918098682-17">17</div><div class="crayon-num" data-line="crayon-5e98c75c2b5e3918098682-18">18</div><div class="crayon-num" data-line="crayon-5e98c75c2b5e3918098682-19">19</div><div class="crayon-num" data-line="crayon-5e98c75c2b5e3918098682-20">20</div><div class="crayon-num" data-line="crayon-5e98c75c2b5e3918098682-21">21</div><div class="crayon-num" data-line="crayon-5e98c75c2b5e3918098682-22">22</div><div class="crayon-num" data-line="crayon-5e98c75c2b5e3918098682-23">23</div><div class="crayon-num" data-line="crayon-5e98c75c2b5e3918098682-24">24</div><div class="crayon-num" data-line="crayon-5e98c75c2b5e3918098682-25">25</div><div class="crayon-num" data-line="crayon-5e98c75c2b5e3918098682-26">26</div><div class="crayon-num" data-line="crayon-5e98c75c2b5e3918098682-27">27</div><div class="crayon-num" data-line="crayon-5e98c75c2b5e3918098682-28">28</div><div class="crayon-num" data-line="crayon-5e98c75c2b5e3918098682-29">29</div><div class="crayon-num" data-line="crayon-5e98c75c2b5e3918098682-30">30</div><div class="crayon-num" data-line="crayon-5e98c75c2b5e3918098682-31">31</div><div class="crayon-num" data-line="crayon-5e98c75c2b5e3918098682-32">32</div><div class="crayon-num" data-line="crayon-5e98c75c2b5e3918098682-33">33</div><div class="crayon-num" data-line="crayon-5e98c75c2b5e3918098682-34">34</div><div class="crayon-num" data-line="crayon-5e98c75c2b5e3918098682-35">35</div><div class="crayon-num" data-line="crayon-5e98c75c2b5e3918098682-36">36</div><div class="crayon-num" data-line="crayon-5e98c75c2b5e3918098682-37">37</div><div class="crayon-num" data-line="crayon-5e98c75c2b5e3918098682-38">38</div><div class="crayon-num" data-line="crayon-5e98c75c2b5e3918098682-39">39</div><div class="crayon-num" data-line="crayon-5e98c75c2b5e3918098682-40">40</div><div class="crayon-num" data-line="crayon-5e98c75c2b5e3918098682-41">41</div><div class="crayon-num" data-line="crayon-5e98c75c2b5e3918098682-42">42</div><div class="crayon-num" data-line="crayon-5e98c75c2b5e3918098682-43">43</div><div class="crayon-num" data-line="crayon-5e98c75c2b5e3918098682-44">44</div><div class="crayon-num" data-line="crayon-5e98c75c2b5e3918098682-45">45</div><div class="crayon-num" data-line="crayon-5e98c75c2b5e3918098682-46">46</div><div class="crayon-num" data-line="crayon-5e98c75c2b5e3918098682-47">47</div><div class="crayon-num" data-line="crayon-5e98c75c2b5e3918098682-48">48</div><div class="crayon-num" data-line="crayon-5e98c75c2b5e3918098682-49">49</div><div class="crayon-num" data-line="crayon-5e98c75c2b5e3918098682-50">50</div><div class="crayon-num" data-line="crayon-5e98c75c2b5e3918098682-51">51</div><div class="crayon-num" data-line="crayon-5e98c75c2b5e3918098682-52">52</div><div class="crayon-num" data-line="crayon-5e98c75c2b5e3918098682-53">53</div><div class="crayon-num" data-line="crayon-5e98c75c2b5e3918098682-54">54</div><div class="crayon-num" data-line="crayon-5e98c75c2b5e3918098682-55">55</div><div class="crayon-num" data-line="crayon-5e98c75c2b5e3918098682-56">56</div><div class="crayon-num" data-line="crayon-5e98c75c2b5e3918098682-57">57</div><div class="crayon-num" data-line="crayon-5e98c75c2b5e3918098682-58">58</div><div class="crayon-num" data-line="crayon-5e98c75c2b5e3918098682-59">59</div><div class="crayon-num" data-line="crayon-5e98c75c2b5e3918098682-60">60</div><div class="crayon-num" data-line="crayon-5e98c75c2b5e3918098682-61">61</div><div class="crayon-num" data-line="crayon-5e98c75c2b5e3918098682-62">62</div><div class="crayon-num" data-line="crayon-5e98c75c2b5e3918098682-63">63</div><div class="crayon-num" data-line="crayon-5e98c75c2b5e3918098682-64">64</div><div class="crayon-num" data-line="crayon-5e98c75c2b5e3918098682-65">65</div><div class="crayon-num" data-line="crayon-5e98c75c2b5e3918098682-66">66</div><div class="crayon-num" data-line="crayon-5e98c75c2b5e3918098682-67">67</div><div class="crayon-num" data-line="crayon-5e98c75c2b5e3918098682-68">68</div></div>
+</td>
+<td class="crayon-code"><div class="crayon-pre" style="font-size: 14px !important; line-height: 17px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5e98c75c2b5e3918098682-1"><span class="crayon-r">import</span><span class="crayon-h"> </span><span class="crayon-v">java</span><span class="crayon-sy">.</span><span class="crayon-v">util</span><span class="crayon-sy">.</span><span class="crayon-v">Arrays</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5e98c75c2b5e3918098682-2"> </div><div class="crayon-line" id="crayon-5e98c75c2b5e3918098682-3"><span class="crayon-t">class</span><span class="crayon-h"> </span><span class="crayon-e">QuickSort</span></div><div class="crayon-line" id="crayon-5e98c75c2b5e3918098682-4"><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-5e98c75c2b5e3918098682-5"><span class="crayon-h">    </span><span class="crayon-m">public</span><span class="crayon-h"> </span><span class="crayon-m">static</span><span class="crayon-h"> </span><span class="crayon-t">void</span><span class="crayon-h"> </span><span class="crayon-e">swap</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-t">int</span><span class="crayon-sy">[</span><span class="crayon-sy">]</span><span class="crayon-h"> </span><span class="crayon-v">arr</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-t">int</span><span class="crayon-h"> </span><span class="crayon-v">i</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-t">int</span><span class="crayon-h"> </span><span class="crayon-v">j</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-5e98c75c2b5e3918098682-6"><span class="crayon-h">        </span><span class="crayon-t">int</span><span class="crayon-h"> </span><span class="crayon-v">temp</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">arr</span><span class="crayon-sy">[</span><span class="crayon-v">i</span><span class="crayon-sy">]</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5e98c75c2b5e3918098682-7"><span class="crayon-h">        </span><span class="crayon-v">arr</span><span class="crayon-sy">[</span><span class="crayon-v">i</span><span class="crayon-sy">]</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">arr</span><span class="crayon-sy">[</span><span class="crayon-v">j</span><span class="crayon-sy">]</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5e98c75c2b5e3918098682-8"><span class="crayon-h">        </span><span class="crayon-v">arr</span><span class="crayon-sy">[</span><span class="crayon-v">j</span><span class="crayon-sy">]</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">temp</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5e98c75c2b5e3918098682-9"><span class="crayon-h">    </span><span class="crayon-sy">}</span></div><div class="crayon-line" id="crayon-5e98c75c2b5e3918098682-10"> </div><div class="crayon-line" id="crayon-5e98c75c2b5e3918098682-11"><span class="crayon-h">    </span><span class="crayon-c">// Partition using Lomuto partition scheme</span></div><div class="crayon-line" id="crayon-5e98c75c2b5e3918098682-12"><span class="crayon-h">    </span><span class="crayon-m">public</span><span class="crayon-h"> </span><span class="crayon-m">static</span><span class="crayon-h"> </span><span class="crayon-t">int</span><span class="crayon-h"> </span><span class="crayon-e">partition</span><span class="crayon-sy">(</span><span class="crayon-t">int</span><span class="crayon-sy">[</span><span class="crayon-sy">]</span><span class="crayon-h"> </span><span class="crayon-v">a</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-t">int</span><span class="crayon-h"> </span><span class="crayon-v">start</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-t">int</span><span class="crayon-h"> </span><span class="crayon-st">end</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5e98c75c2b5e3918098682-13"><span class="crayon-h">    </span><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-5e98c75c2b5e3918098682-14"><span class="crayon-h">        </span><span class="crayon-c">// Pick rightmost element as pivot from the array</span></div><div class="crayon-line" id="crayon-5e98c75c2b5e3918098682-15"><span class="crayon-h">        </span><span class="crayon-t">int</span><span class="crayon-h"> </span><span class="crayon-v">pivot</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">a</span><span class="crayon-sy">[</span><span class="crayon-st">end</span><span class="crayon-sy">]</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5e98c75c2b5e3918098682-16"> </div><div class="crayon-line" id="crayon-5e98c75c2b5e3918098682-17"><span class="crayon-h">        </span><span class="crayon-c">// elements less than pivot will be pushed to the left of pIndex</span></div><div class="crayon-line" id="crayon-5e98c75c2b5e3918098682-18"><span class="crayon-h">        </span><span class="crayon-c">// elements more than pivot will be pushed to the right of pIndex</span></div><div class="crayon-line" id="crayon-5e98c75c2b5e3918098682-19"><span class="crayon-h">        </span><span class="crayon-c">// equal elements can go either way</span></div><div class="crayon-line" id="crayon-5e98c75c2b5e3918098682-20"><span class="crayon-h">        </span><span class="crayon-t">int</span><span class="crayon-h"> </span><span class="crayon-v">pIndex</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">start</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5e98c75c2b5e3918098682-21"> </div><div class="crayon-line" id="crayon-5e98c75c2b5e3918098682-22"><span class="crayon-h">        </span><span class="crayon-c">// each time we finds an element less than or equal to pivot,</span></div><div class="crayon-line" id="crayon-5e98c75c2b5e3918098682-23"><span class="crayon-h">        </span><span class="crayon-c">// pIndex is incremented and that element would be placed </span></div><div class="crayon-line" id="crayon-5e98c75c2b5e3918098682-24"><span class="crayon-h">        </span><span class="crayon-c">// before the pivot.</span></div><div class="crayon-line" id="crayon-5e98c75c2b5e3918098682-25"><span class="crayon-h">        </span><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-t">int</span><span class="crayon-h"> </span><span class="crayon-v">i</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">start</span><span class="crayon-sy">;</span><span class="crayon-h"> </span><span class="crayon-v">i</span><span class="crayon-h"> </span><span class="crayon-o">&lt;</span><span class="crayon-h"> </span><span class="crayon-st">end</span><span class="crayon-sy">;</span><span class="crayon-h"> </span><span class="crayon-v">i</span><span class="crayon-o">++</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5e98c75c2b5e3918098682-26"><span class="crayon-h">        </span><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-5e98c75c2b5e3918098682-27"><span class="crayon-h">            </span><span class="crayon-st">if</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-v">a</span><span class="crayon-sy">[</span><span class="crayon-v">i</span><span class="crayon-sy">]</span><span class="crayon-h"> </span><span class="crayon-o">&lt;=</span><span class="crayon-h"> </span><span class="crayon-v">pivot</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-5e98c75c2b5e3918098682-28"><span class="crayon-h">                </span><span class="crayon-e">swap</span><span class="crayon-sy">(</span><span class="crayon-v">a</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">i</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">pIndex</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5e98c75c2b5e3918098682-29"><span class="crayon-h">                </span><span class="crayon-v">pIndex</span><span class="crayon-o">++</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5e98c75c2b5e3918098682-30"><span class="crayon-h">            </span><span class="crayon-sy">}</span></div><div class="crayon-line" id="crayon-5e98c75c2b5e3918098682-31"><span class="crayon-h">        </span><span class="crayon-sy">}</span></div><div class="crayon-line" id="crayon-5e98c75c2b5e3918098682-32"> </div><div class="crayon-line" id="crayon-5e98c75c2b5e3918098682-33"><span class="crayon-h">        </span><span class="crayon-c">// swap pIndex with Pivot</span></div><div class="crayon-line" id="crayon-5e98c75c2b5e3918098682-34"><span class="crayon-h">        </span><span class="crayon-e">swap</span><span class="crayon-sy">(</span><span class="crayon-v">a</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-st">end</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">pIndex</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5e98c75c2b5e3918098682-35"> </div><div class="crayon-line" id="crayon-5e98c75c2b5e3918098682-36"><span class="crayon-h">        </span><span class="crayon-c">// return pIndex (index of pivot element)</span></div><div class="crayon-line" id="crayon-5e98c75c2b5e3918098682-37"><span class="crayon-h">        </span><span class="crayon-st">return</span><span class="crayon-h"> </span><span class="crayon-v">pIndex</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5e98c75c2b5e3918098682-38"><span class="crayon-h">    </span><span class="crayon-sy">}</span></div><div class="crayon-line" id="crayon-5e98c75c2b5e3918098682-39"> </div><div class="crayon-line" id="crayon-5e98c75c2b5e3918098682-40"><span class="crayon-h">    </span><span class="crayon-c">// Quicksort routine</span></div><div class="crayon-line" id="crayon-5e98c75c2b5e3918098682-41"><span class="crayon-h">    </span><span class="crayon-m">public</span><span class="crayon-h"> </span><span class="crayon-m">static</span><span class="crayon-h"> </span><span class="crayon-t">void</span><span class="crayon-h"> </span><span class="crayon-e">quicksort</span><span class="crayon-sy">(</span><span class="crayon-t">int</span><span class="crayon-sy">[</span><span class="crayon-sy">]</span><span class="crayon-h"> </span><span class="crayon-i">a</span><span class="crayon-h"> </span><span class="crayon-sy">,</span><span class="crayon-t">int</span><span class="crayon-h"> </span><span class="crayon-v">start</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-t">int</span><span class="crayon-h"> </span><span class="crayon-st">end</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5e98c75c2b5e3918098682-42"><span class="crayon-h">    </span><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-5e98c75c2b5e3918098682-43"><span class="crayon-h">        </span><span class="crayon-c">// base condition</span></div><div class="crayon-line" id="crayon-5e98c75c2b5e3918098682-44"><span class="crayon-h">        </span><span class="crayon-st">if</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-v">start</span><span class="crayon-h"> </span><span class="crayon-o">&gt;=</span><span class="crayon-h"> </span><span class="crayon-st">end</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-5e98c75c2b5e3918098682-45"><span class="crayon-h">            </span><span class="crayon-st">return</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5e98c75c2b5e3918098682-46"><span class="crayon-h">        </span><span class="crayon-sy">}</span></div><div class="crayon-line" id="crayon-5e98c75c2b5e3918098682-47"> </div><div class="crayon-line" id="crayon-5e98c75c2b5e3918098682-48"><span class="crayon-h">        </span><span class="crayon-c">// rearrange the elements across pivot</span></div><div class="crayon-line" id="crayon-5e98c75c2b5e3918098682-49"><span class="crayon-h">        </span><span class="crayon-t">int</span><span class="crayon-h"> </span><span class="crayon-v">pivot</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-e">partition</span><span class="crayon-sy">(</span><span class="crayon-v">a</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">start</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-st">end</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5e98c75c2b5e3918098682-50"> </div><div class="crayon-line" id="crayon-5e98c75c2b5e3918098682-51"><span class="crayon-h">        </span><span class="crayon-c">// recur on sub-array containing elements less than pivot</span></div><div class="crayon-line" id="crayon-5e98c75c2b5e3918098682-52"><span class="crayon-h">        </span><span class="crayon-e">quicksort</span><span class="crayon-sy">(</span><span class="crayon-v">a</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">start</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">pivot</span><span class="crayon-h"> </span><span class="crayon-o">-</span><span class="crayon-h"> </span><span class="crayon-cn">1</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5e98c75c2b5e3918098682-53"> </div><div class="crayon-line" id="crayon-5e98c75c2b5e3918098682-54"><span class="crayon-h">        </span><span class="crayon-c">// recur on sub-array containing elements more than pivot</span></div><div class="crayon-line" id="crayon-5e98c75c2b5e3918098682-55"><span class="crayon-h">        </span><span class="crayon-e">quicksort</span><span class="crayon-sy">(</span><span class="crayon-v">a</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">pivot</span><span class="crayon-h"> </span><span class="crayon-o">+</span><span class="crayon-h"> </span><span class="crayon-cn">1</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-st">end</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5e98c75c2b5e3918098682-56"><span class="crayon-h">    </span><span class="crayon-sy">}</span></div><div class="crayon-line" id="crayon-5e98c75c2b5e3918098682-57"> </div><div class="crayon-line" id="crayon-5e98c75c2b5e3918098682-58"><span class="crayon-h">    </span><span class="crayon-c">// Java implementation of quicksort algorithm</span></div><div class="crayon-line" id="crayon-5e98c75c2b5e3918098682-59"><span class="crayon-h">    </span><span class="crayon-m">public</span><span class="crayon-h"> </span><span class="crayon-m">static</span><span class="crayon-h"> </span><span class="crayon-t">void</span><span class="crayon-h"> </span><span class="crayon-e">main</span><span class="crayon-sy">(</span><span class="crayon-t">String</span><span class="crayon-sy">[</span><span class="crayon-sy">]</span><span class="crayon-h"> </span><span class="crayon-v">args</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5e98c75c2b5e3918098682-60"><span class="crayon-h">    </span><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-5e98c75c2b5e3918098682-61"><span class="crayon-h">        </span><span class="crayon-t">int</span><span class="crayon-h"> </span><span class="crayon-v">a</span><span class="crayon-sy">[</span><span class="crayon-sy">]</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-sy">{</span><span class="crayon-h"> </span><span class="crayon-cn">9</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-o">-</span><span class="crayon-cn">3</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">5</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">2</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">6</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">8</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-o">-</span><span class="crayon-cn">6</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">1</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">3</span><span class="crayon-h"> </span><span class="crayon-sy">}</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5e98c75c2b5e3918098682-62"> </div><div class="crayon-line" id="crayon-5e98c75c2b5e3918098682-63"><span class="crayon-h">        </span><span class="crayon-e">quicksort</span><span class="crayon-sy">(</span><span class="crayon-v">a</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">0</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">a</span><span class="crayon-sy">.</span><span class="crayon-v">length</span><span class="crayon-h"> </span><span class="crayon-o">-</span><span class="crayon-h"> </span><span class="crayon-cn">1</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5e98c75c2b5e3918098682-64"> </div><div class="crayon-line" id="crayon-5e98c75c2b5e3918098682-65"><span class="crayon-h">        </span><span class="crayon-c">// print the sorted array</span></div><div class="crayon-line" id="crayon-5e98c75c2b5e3918098682-66"><span class="crayon-h">        </span><span class="crayon-v">System</span><span class="crayon-sy">.</span><span class="crayon-v">out</span><span class="crayon-sy">.</span><span class="crayon-e">println</span><span class="crayon-sy">(</span><span class="crayon-v">Arrays</span><span class="crayon-sy">.</span><span class="crayon-e">toString</span><span class="crayon-sy">(</span><span class="crayon-v">a</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5e98c75c2b5e3918098682-67"><span class="crayon-h">    </span><span class="crayon-sy">}</span></div><div class="crayon-line" id="crayon-5e98c75c2b5e3918098682-68"><span class="crayon-sy">}</span></div></div></td>
+</tr></table></div>
+</div>
+
+<p></p>
+<p style="text-align: justify; padding-left: 70%;"><span style="color: #ff0000;"><a style="color: #006400;" href="https://www.techiedelight.com/code/H2noGI" target="_blank" download="Main.java">Download</a>   <a style="color: #ff0000;" href="https://techiedelight.com/compiler/?run=H2noGI" target="_blank">Run Code</a></span></p>
+<p>
+</p></div><h2 class="tabtitle"><tt>Python</tt></h2>
+<div class="tabcontent">
+
+<div id="crayon-5e98c75c2b5e6864789257" class="crayon-syntax crayon-theme-familiar crayon-font-consolas crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 14px !important; line-height: 17px !important;">
+<div class="crayon-toolbar" data-settings=" show" style="font-size: 14px !important;height: 21px !important; line-height: 21px !important;"><span class="crayon-title"></span>
+<div class="crayon-tools" style="font-size: 14px !important;height: 21px !important; line-height: 21px !important;"><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div></div></div>
+<div class="crayon-info" style="min-height: 19.6px !important; line-height: 19.6px !important;"></div>
+<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 14px !important; line-height: 17px !important;">
+# Python implementation of quicksort algorithm
+def quicksort(arr):
+	if len(arr) &lt;= 1:
+		return arr
+	pivot = arr[len(arr) // 2]
+	left = [x for x in arr if x &lt; pivot]
+	mid = [x for x in arr if x == pivot]
+	right = [x for x in arr if x &gt; pivot]
+	return quicksort(left) + mid + quicksort(right)
+
+print(quicksort([9, -3, 5, 2, 6, 8, -6, 1, 3]))</textarea></div>
+<div class="crayon-main" style="">
+<table class="crayon-table"><tr class="crayon-row"><td class="crayon-nums " data-settings="show">
+<div class="crayon-nums-content" style="font-size: 14px !important; line-height: 17px !important;"><div class="crayon-num" data-line="crayon-5e98c75c2b5e6864789257-1">1</div><div class="crayon-num" data-line="crayon-5e98c75c2b5e6864789257-2">2</div><div class="crayon-num" data-line="crayon-5e98c75c2b5e6864789257-3">3</div><div class="crayon-num" data-line="crayon-5e98c75c2b5e6864789257-4">4</div><div class="crayon-num" data-line="crayon-5e98c75c2b5e6864789257-5">5</div><div class="crayon-num" data-line="crayon-5e98c75c2b5e6864789257-6">6</div><div class="crayon-num" data-line="crayon-5e98c75c2b5e6864789257-7">7</div><div class="crayon-num" data-line="crayon-5e98c75c2b5e6864789257-8">8</div><div class="crayon-num" data-line="crayon-5e98c75c2b5e6864789257-9">9</div><div class="crayon-num" data-line="crayon-5e98c75c2b5e6864789257-10">10</div><div class="crayon-num" data-line="crayon-5e98c75c2b5e6864789257-11">11</div></div>
+</td>
+<td class="crayon-code"><div class="crayon-pre" style="font-size: 14px !important; line-height: 17px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5e98c75c2b5e6864789257-1"><span class="crayon-c"># Python implementation of quicksort algorithm</span></div><div class="crayon-line" id="crayon-5e98c75c2b5e6864789257-2"><span class="crayon-r">def</span><span class="crayon-h"> </span><span class="crayon-e">quicksort</span><span class="crayon-sy">(</span><span class="crayon-v">arr</span><span class="crayon-sy">)</span><span class="crayon-o">:</span></div><div class="crayon-line" id="crayon-5e98c75c2b5e6864789257-3"><span class="crayon-h">    </span><span class="crayon-st">if</span><span class="crayon-h"> </span><span class="crayon-k ">len</span><span class="crayon-sy">(</span><span class="crayon-v">arr</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-o">&lt;=</span><span class="crayon-h"> </span><span class="crayon-cn">1</span><span class="crayon-o">:</span></div><div class="crayon-line" id="crayon-5e98c75c2b5e6864789257-4"><span class="crayon-h">        </span><span class="crayon-st">return</span><span class="crayon-h"> </span><span class="crayon-e">arr</span></div><div class="crayon-line" id="crayon-5e98c75c2b5e6864789257-5"><span class="crayon-e">    </span><span class="crayon-v">pivot</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">arr</span><span class="crayon-sy">[</span><span class="crayon-k ">len</span><span class="crayon-sy">(</span><span class="crayon-v">arr</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-o">/</span><span class="crayon-o">/</span><span class="crayon-h"> </span><span class="crayon-cn">2</span><span class="crayon-sy">]</span></div><div class="crayon-line" id="crayon-5e98c75c2b5e6864789257-6"><span class="crayon-h">    </span><span class="crayon-v">left</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-i">x</span><span class="crayon-h"> </span><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-i">x</span><span class="crayon-h"> </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-e">arr </span><span class="crayon-st">if</span><span class="crayon-h"> </span><span class="crayon-v">x</span><span class="crayon-h"> </span><span class="crayon-o">&lt;</span><span class="crayon-h"> </span><span class="crayon-v">pivot</span><span class="crayon-sy">]</span></div><div class="crayon-line" id="crayon-5e98c75c2b5e6864789257-7"><span class="crayon-h">    </span><span class="crayon-v">mid</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-i">x</span><span class="crayon-h"> </span><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-i">x</span><span class="crayon-h"> </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-e">arr </span><span class="crayon-st">if</span><span class="crayon-h"> </span><span class="crayon-v">x</span><span class="crayon-h"> </span><span class="crayon-o">==</span><span class="crayon-h"> </span><span class="crayon-v">pivot</span><span class="crayon-sy">]</span></div><div class="crayon-line" id="crayon-5e98c75c2b5e6864789257-8"><span class="crayon-h">    </span><span class="crayon-v">right</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-i">x</span><span class="crayon-h"> </span><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-i">x</span><span class="crayon-h"> </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-e">arr </span><span class="crayon-st">if</span><span class="crayon-h"> </span><span class="crayon-v">x</span><span class="crayon-h"> </span><span class="crayon-o">&gt;</span><span class="crayon-h"> </span><span class="crayon-v">pivot</span><span class="crayon-sy">]</span></div><div class="crayon-line" id="crayon-5e98c75c2b5e6864789257-9"><span class="crayon-h">    </span><span class="crayon-st">return</span><span class="crayon-h"> </span><span class="crayon-e">quicksort</span><span class="crayon-sy">(</span><span class="crayon-v">left</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-o">+</span><span class="crayon-h"> </span><span class="crayon-v">mid</span><span class="crayon-h"> </span><span class="crayon-o">+</span><span class="crayon-h"> </span><span class="crayon-e">quicksort</span><span class="crayon-sy">(</span><span class="crayon-v">right</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5e98c75c2b5e6864789257-10"> </div><div class="crayon-line" id="crayon-5e98c75c2b5e6864789257-11"><span class="crayon-k ">print</span><span class="crayon-sy">(</span><span class="crayon-e">quicksort</span><span class="crayon-sy">(</span><span class="crayon-sy">[</span><span class="crayon-cn">9</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-o">-</span><span class="crayon-cn">3</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">5</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">2</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">6</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">8</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-o">-</span><span class="crayon-cn">6</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">1</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">3</span><span class="crayon-sy">]</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span></div></div></td>
+</tr></table></div>
+</div>
+
+<p></p>
+<p style="text-align: justify; padding-left: 70%;"><span style="color: #ff0000;"><a style="color: #006400;" href="https://www.techiedelight.com/code/H2noGI" target="_blank" download="main.py">Download</a>   <a style="color: #ff0000;" href="https://techiedelight.com/compiler/?run=H2noGI" target="_blank">Run Code</a></span></p>
+<p></p></div></div><br><span style="color: #0000ff;"><strong><tt>Output:</tt></strong></span><br><font face="consolas" size="3"><br>
+-6 -3 1 2 3 5 6 8 9<br></font>
+<p> </p>
+<h2>Quicksort Performance:</h2>
+<p> <br>
+The worst case time complexity of Quicksort is <span style="color: red; font-family: consolas; font-size: medium;">O(n<sup>2</sup>)</span>. The worst case happens when the pivot happens to be the smallest or largest element in the list, or when all the elements of array are equal. This will result in most unbalanced partition as the pivot divides the array into two sub-array of sizes 0 and n – 1. If this happens repeatedly in every partition (example, we have sorted array), then each recursive call processes a list of size one less than the previous list and that will result in <span style="color: red; font-family: consolas; font-size: medium;">O(n<sup>2</sup>)</span> time.</p>
+<p><font face="consolas" size="3">T(n) = T(n-1) + cn = O(n²)</font></p>
+<p><em>(Note – partition takes <span style="color: green; font-family: consolas; font-size: medium;">O(n)</span> time that accounts for cn)</em></p>
+<p> <br>
+The best case time complexity of quicksort is <span style="color: green; font-family: consolas; font-size: medium;">O(nlog(n))</span>. The best case happens when the pivot divides the array into two nearly equal pieces. Now each recursive call processes a list of half the size.</p>
+<p><font face="consolas" size="3">T(n) = 2 T(n/2) + cn = O(n log(n))</font></p>
+<p> </p>
+<h6>Must Read:</h6>
+<blockquote class="wp-embedded-content" data-secret="LNOz9Fh17I"><p><a href="https://www.techiedelight.com/boost-quicksort-performance/">How to Boost Quicksort performance?</a></p></blockquote>
+<p><iframe title="“How to Boost Quicksort performance?” — Techie Delight" class="wp-embedded-content" sandbox="allow-scripts" security="restricted" style="position: absolute; clip: rect(1px, 1px, 1px, 1px);" src="https://www.techiedelight.com/boost-quicksort-performance/embed/#?secret=LNOz9Fh17I" data-secret="LNOz9Fh17I" width="600" height="338" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></p>
+<p> <br><strong>References:</strong> <a rel="nofollow noopener noreferrer" href="https://en.wikipedia.org/wiki/Quicksort" target="_blank">https://en.wikipedia.org/wiki/Quicksort</a></p>
+<div class="techi-content" id="techi-246215197"><br><div id="bsa-zone_1572273220499-9_123456"></div>
+<br></div><p> <br><span id="post-ratings-6917" class="post-ratings" data-nonce="3cf6cab59a"><img id="rating_6917_1" src="https://www.techiedelight.com/wp-content/plugins/wp-postratings/images/stars/rating_on.gif" alt="1 Star" title="1 Star" onmouseover="current_rating(6917, 1, &#039;1 Star&#039;);" onmouseout="ratings_off(4.7, 5, 0);" onclick="rate_post();" onkeypress="rate_post();" style="cursor: pointer; border: 0px;" data-lazy-src="https://www.techiedelight.com/wp-content/plugins/wp-postratings/images/stars/rating_on.gif?is-pending-load=1" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" class=" jetpack-lazy-image"><noscript><img id="rating_6917_1" src="https://www.techiedelight.com/wp-content/plugins/wp-postratings/images/stars/rating_on.gif" alt="1 Star" title="1 Star" onmouseover="current_rating(6917, 1, '1 Star');" onmouseout="ratings_off(4.7, 5, 0);" onclick="rate_post();" onkeypress="rate_post();" style="cursor: pointer; border: 0px;"></noscript><img id="rating_6917_2" src="https://www.techiedelight.com/wp-content/plugins/wp-postratings/images/stars/rating_on.gif" alt="2 Stars" title="2 Stars" onmouseover="current_rating(6917, 2, &#039;2 Stars&#039;);" onmouseout="ratings_off(4.7, 5, 0);" onclick="rate_post();" onkeypress="rate_post();" style="cursor: pointer; border: 0px;" data-lazy-src="https://www.techiedelight.com/wp-content/plugins/wp-postratings/images/stars/rating_on.gif?is-pending-load=1" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" class=" jetpack-lazy-image"><noscript><img id="rating_6917_2" src="https://www.techiedelight.com/wp-content/plugins/wp-postratings/images/stars/rating_on.gif" alt="2 Stars" title="2 Stars" onmouseover="current_rating(6917, 2, '2 Stars');" onmouseout="ratings_off(4.7, 5, 0);" onclick="rate_post();" onkeypress="rate_post();" style="cursor: pointer; border: 0px;"></noscript><img id="rating_6917_3" src="https://www.techiedelight.com/wp-content/plugins/wp-postratings/images/stars/rating_on.gif" alt="3 Stars" title="3 Stars" onmouseover="current_rating(6917, 3, &#039;3 Stars&#039;);" onmouseout="ratings_off(4.7, 5, 0);" onclick="rate_post();" onkeypress="rate_post();" style="cursor: pointer; border: 0px;" data-lazy-src="https://www.techiedelight.com/wp-content/plugins/wp-postratings/images/stars/rating_on.gif?is-pending-load=1" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" class=" jetpack-lazy-image"><noscript><img id="rating_6917_3" src="https://www.techiedelight.com/wp-content/plugins/wp-postratings/images/stars/rating_on.gif" alt="3 Stars" title="3 Stars" onmouseover="current_rating(6917, 3, '3 Stars');" onmouseout="ratings_off(4.7, 5, 0);" onclick="rate_post();" onkeypress="rate_post();" style="cursor: pointer; border: 0px;"></noscript><img id="rating_6917_4" src="https://www.techiedelight.com/wp-content/plugins/wp-postratings/images/stars/rating_on.gif" alt="4 Stars" title="4 Stars" onmouseover="current_rating(6917, 4, &#039;4 Stars&#039;);" onmouseout="ratings_off(4.7, 5, 0);" onclick="rate_post();" onkeypress="rate_post();" style="cursor: pointer; border: 0px;" data-lazy-src="https://www.techiedelight.com/wp-content/plugins/wp-postratings/images/stars/rating_on.gif?is-pending-load=1" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" class=" jetpack-lazy-image"><noscript><img id="rating_6917_4" src="https://www.techiedelight.com/wp-content/plugins/wp-postratings/images/stars/rating_on.gif" alt="4 Stars" title="4 Stars" onmouseover="current_rating(6917, 4, '4 Stars');" onmouseout="ratings_off(4.7, 5, 0);" onclick="rate_post();" onkeypress="rate_post();" style="cursor: pointer; border: 0px;"></noscript><img id="rating_6917_5" src="https://www.techiedelight.com/wp-content/plugins/wp-postratings/images/stars/rating_half.gif" alt="5 Stars" title="5 Stars" onmouseover="current_rating(6917, 5, &#039;5 Stars&#039;);" onmouseout="ratings_off(4.7, 5, 0);" onclick="rate_post();" onkeypress="rate_post();" style="cursor: pointer; border: 0px;" data-lazy-src="https://www.techiedelight.com/wp-content/plugins/wp-postratings/images/stars/rating_half.gif?is-pending-load=1" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" class=" jetpack-lazy-image"><noscript><img id="rating_6917_5" src="https://www.techiedelight.com/wp-content/plugins/wp-postratings/images/stars/rating_half.gif" alt="5 Stars" title="5 Stars" onmouseover="current_rating(6917, 5, '5 Stars');" onmouseout="ratings_off(4.7, 5, 0);" onclick="rate_post();" onkeypress="rate_post();" style="cursor: pointer; border: 0px;"></noscript> (<strong>15</strong> votes, average: <strong>4.67</strong> out of 5)<br><span class="post-ratings-text" id="ratings_6917_text"></span></span><span id="post-ratings-6917-loading" class="post-ratings-loading"><img src="https://www.techiedelight.com/wp-content/plugins/wp-postratings/images/loading.gif" width="16" height="16" class="post-ratings-image jetpack-lazy-image" data-lazy-src="https://www.techiedelight.com/wp-content/plugins/wp-postratings/images/loading.gif?is-pending-load=1" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"><noscript><img src="https://www.techiedelight.com/wp-content/plugins/wp-postratings/images/loading.gif" width="16" height="16" class="post-ratings-image"></noscript>Loading...</span></p>
+<p><strong>Thanks for reading.</strong></p>
+<p>Please use our <a href="https://techiedelight.com/compiler/" target="_blank">online compiler</a> to post code in comments using C, C++, Java, Python, JavaScript, C#, PHP and many more popular programming languages.</p>
+<p>Like us? Refer your friends and help us grow. Happy coding 🙂<br>
+ </p>
+<hr><p>
+</p></div>
+<div class="sharedaddy sd-sharing-enabled"><div class="robots-nocontent sd-block sd-social sd-social-official sd-sharing"><h3 class="sd-title">Sharing is caring:</h3><div class="sd-content"><ul><li class="share-twitter"><a href="https://twitter.com/share" class="twitter-share-button" data-url="https://www.techiedelight.com/quicksort/" data-text="Quicksort Algorithm" data-via="techie_delight">Tweet</a></li><li class="share-facebook"><div class="fb-share-button" data-href="https://www.techiedelight.com/quicksort/" data-layout="button_count"></div></li><li class="share-linkedin"><div class="linkedin_button"><script type="in/share" data-url="https://www.techiedelight.com/quicksort/" data-counter="right"></script></div></li><li><a href="#" class="sharing-anchor sd-button share-more"><span>More</span></a></li><li class="share-end"></ul><div class="sharing-hidden"><div class="inner" style="display: none;"><ul><li class="share-pocket"><div class="pocket_button"><a href="https://getpocket.com/save" class="pocket-btn" data-lang="en" data-save-url="https://www.techiedelight.com/quicksort/" data-pocket-count="horizontal">Pocket</a></div></li><li class="share-telegram"><a rel="nofollow noopener noreferrer" data-shared="" class="share-telegram sd-button" href="https://www.techiedelight.com/quicksort/?share=telegram" target="_blank" title="Click to share on Telegram"><span>Telegram</span></a></li><li class="share-end"><li class="share-jetpack-whatsapp"><a rel="nofollow noopener noreferrer" data-shared="" class="share-jetpack-whatsapp sd-button" href="https://www.techiedelight.com/quicksort/?share=jetpack-whatsapp" target="_blank" title="Click to share on WhatsApp"><span>WhatsApp</span></a></li><li class="share-skype"><div class="skype-share" data-href="https://www.techiedelight.com/quicksort/" data-lang="en-US" data-style="small" data-source="jetpack"></div></li><li class="share-end"><li class="share-end"></ul></div></div></div></div></div><div class="techi-after-content" id="techi-24504371"><br><div id="bsa-zone_1571847890312-0_123456"></div>
+<br></div>
+</div>
+<footer class="entry-footer">
+<div class="entry-taxonomies">
+<span class="entry-taxonomy category">
+<span class="entry-taxonomy-text">Categories</span>
+<a href="https://www.techiedelight.com/Category/array/" rel="tag">Array</a>, <a href="https://www.techiedelight.com/Category/divide-conquer/" rel="tag">Divide &amp; Conquer</a>, <a href="https://www.techiedelight.com/Category/sorting/" rel="tag">Sorting</a> </span>
+<span class="entry-taxonomy post_tag">
+<span class="entry-taxonomy-text">Tags</span>
+<a href="https://www.techiedelight.com/Tags/adobe/" rel="tag">Adobe</a>, <a href="https://www.techiedelight.com/Tags/algorithm/" rel="tag">Algorithm</a>, <a href="https://www.techiedelight.com/Tags/intro/" rel="tag">Intro</a>, <a href="https://www.techiedelight.com/Tags/must-know/" rel="tag">Must Know</a>, <a href="https://www.techiedelight.com/Tags/recursion/" rel="tag">Recursive</a> </span>
+</div>
+</footer>
+</div>
+</article>
+<nav class="post-navigation">
+<div class="nav-prev"><span class="screen-reader-text">Previous:</span> <a href="https://www.techiedelight.com/perform-division-two-numbers-without-using-division-operator/" rel="prev">Perform Division of two numbers without using division operator (/)</a></div> <div class="nav-next"><span class="screen-reader-text">Next:</span> <a href="https://www.techiedelight.com/iterative-implementation-of-quicksort/" rel="next">Iterative Implementation of Quicksort</a></div></nav>
+<div class="wpdiscuz_top_clearing"></div>
+<div id="comments" class="comments-area">
+<div id="respond" style="width: 0;height: 0;clear: both;margin: 0;padding: 0;"></div>
+<h3 id="wc-comment-header">Leave a Reply</h3>
+<div id="wpcomm" class="wpdiscuz_unauth wpd-default">
+<div class="wc_social_plugin_wrapper">
+</div>
+<div class="wc-form-wrapper wc-main-form-wrapper" id='wc-main-form-wrapper-0_0'>
+<div class="wpdiscuz-comment-message" style="display: block;"></div>
+<form class="wc_comm_form wc_main_comm_form" method="post" enctype="multipart/form-data">
+<div class="wc-field-comment">
+<div class="wc-field-avatararea">
+<img alt="avatar" src="https://secure.gravatar.com/avatar/?s=64&#038;d=wavatar&#038;r=g" class="avatar avatar-64 photo avatar-default jetpack-lazy-image" height="64" width="64" data-lazy-srcset="https://secure.gravatar.com/avatar/?s=128&#038;d=wavatar&#038;r=g 2x" data-lazy-src="https://secure.gravatar.com/avatar/?s=64&amp;is-pending-load=1#038;d=wavatar&#038;r=g" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"><noscript><img alt='avatar' src='https://secure.gravatar.com/avatar/?s=64&#038;d=wavatar&#038;r=g' srcset='https://secure.gravatar.com/avatar/?s=128&#038;d=wavatar&#038;r=g 2x' class='avatar avatar-64 photo avatar-default' height='64' width='64' /></noscript> </div>
+<div class="wpdiscuz-item wc-field-textarea">
+<div class="wpdiscuz-textarea-wrap wpdiscuz-quicktags-enabled">
+<textarea id="wc-textarea-0_0" placeholder="Join the discussion (Please use an online compiler to post code in comments)" required name="wc_comment" class="wc_comment wpd-field"></textarea>
+</div>
+</div>
+<div class="clearfix"></div>
+</div>
+<div class="wc-form-footer" style="display: none;">
+<div class="wpd-form-row">
+<div class="wpd-form-col-left">
+<div class="wpdiscuz-item wpd-has-icon">
+<div class="wpd-field-icon"><i class="fas fa-user"></i></div>
+<input value="" required="required" class="wc_name wpd-field" type="text" name="wc_name" value="" placeholder="Name" maxlength="50" pattern=".{2,50}" title="">
+</div>
+<div class="wpdiscuz-item wpd-has-icon">
+<div class="wpd-field-icon"><i class="fas fa-at"></i></div>
+<input value="" required="required" class="wc_email wpd-field" type="email" name="wc_email" value="" placeholder="Email">
+</div>
+</div>
+<div class="wpd-form-col-right">
+<div class="wc-field-submit">
+<label class="wpd_label">
+<input id="wc_notification_new_comment-0_0" class="wc_notification_new_comment-0_0 wpd_label__checkbox" value="comment" type="checkbox" name="wpdiscuz_notification_type" />
+<span class="wpd_label__text">
+<span class="wpd_label__check">
+<div class="wpd-field-desc"><i class="fas fa-bell wpdicon wpdicon-on"></i><span>Notify of new replies to this comment - (on)</span></div>
+<div class="wpd-field-desc"><i class="fas fa-bell-slash wpdicon wpdicon-off"></i><span>Notify of new replies to this comment - (off)</span></div>
+</span>
+</span>
+</label>
+ <input class="wc_comm_submit wc_not_clicked button alt" type="submit" name="submit" value="Post Comment">
+</div>
+</div>
+<div class="clearfix"></div>
+</div>
+</div>
+<div class="clearfix"></div>
+<input type="hidden" class="wpdiscuz_unique_id" value="0_0" name="wpdiscuz_unique_id">
+</form>
+</div>
+<div id="wpdiscuz_hidden_secondary_form" style="display: none;">
+<div class="wc-form-wrapper wc-secondary-form-wrapper" id='wc-secondary-form-wrapper-wpdiscuzuniqueid' style='display: none;'>
+<div class="wpdiscuz-comment-message" style="display: block;"></div>
+<div class="wc-secondary-forms-social-content"></div>
+<form class="wc_comm_form wc-secondary-form-wrapper" method="post" enctype="multipart/form-data">
+<div class="wc-field-comment">
+<div class="wc-field-avatararea">
+<img alt="avatar" src="https://secure.gravatar.com/avatar/?s=48&#038;d=wavatar&#038;r=g" class="avatar avatar-48 photo avatar-default jetpack-lazy-image" height="48" width="48" data-lazy-srcset="https://secure.gravatar.com/avatar/?s=96&#038;d=wavatar&#038;r=g 2x" data-lazy-src="https://secure.gravatar.com/avatar/?s=48&amp;is-pending-load=1#038;d=wavatar&#038;r=g" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"><noscript><img alt='avatar' src='https://secure.gravatar.com/avatar/?s=48&#038;d=wavatar&#038;r=g' srcset='https://secure.gravatar.com/avatar/?s=96&#038;d=wavatar&#038;r=g 2x' class='avatar avatar-48 photo avatar-default' height='48' width='48' /></noscript> </div>
+<div class="wpdiscuz-item wc-field-textarea">
+<div class="wpdiscuz-textarea-wrap wpdiscuz-quicktags-enabled">
+<textarea id="wc-textarea-wpdiscuzuniqueid" placeholder="Join the discussion (Please use an online compiler to post code in comments)" required name="wc_comment" class="wc_comment wpd-field"></textarea>
+</div>
+</div>
+<div class="clearfix"></div>
+</div>
+<div class="wc-form-footer" style="display: none;">
+<div class="wpd-form-row">
+<div class="wpd-form-col-left">
+<div class="wpdiscuz-item wpd-has-icon">
+<div class="wpd-field-icon"><i class="fas fa-user"></i></div>
+<input value="" required="required" class="wc_name wpd-field" type="text" name="wc_name" value="" placeholder="Name" maxlength="50" pattern=".{2,50}" title="">
+</div>
+<div class="wpdiscuz-item wpd-has-icon">
+<div class="wpd-field-icon"><i class="fas fa-at"></i></div>
+<input value="" required="required" class="wc_email wpd-field" type="email" name="wc_email" value="" placeholder="Email">
+</div>
+</div>
+<div class="wpd-form-col-right">
+<div class="wc-field-submit">
+<label class="wpd_label">
+<input id="wc_notification_new_comment-wpdiscuzuniqueid" class="wc_notification_new_comment-wpdiscuzuniqueid wpd_label__checkbox" value="comment" type="checkbox" name="wpdiscuz_notification_type" />
+ <span class="wpd_label__text">
+<span class="wpd_label__check">
+<div class="wpd-field-desc"><i class="fas fa-bell wpdicon wpdicon-on"></i><span>Notify of new replies to this comment - (on)</span></div>
+<div class="wpd-field-desc"><i class="fas fa-bell-slash wpdicon wpdicon-off"></i><span>Notify of new replies to this comment - (off)</span></div>
+</span>
+</span>
+</label>
+<input class="wc_comm_submit wc_not_clicked button alt" type="submit" name="submit" value="Post Comment">
+</div>
+</div>
+<div class="clearfix"></div>
+</div>
+</div>
+<div class="clearfix"></div>
+<input type="hidden" class="wpdiscuz_unique_id" value="wpdiscuzuniqueid" name="wpdiscuz_unique_id">
+</form>
+</div>
+</div>
+<div class="wpdiscuz-front-actions" style="background: #FFF">
+<div class="wpdiscuz-sort-buttons" style="font-size:14px; color: #777;">
+<i class="fas fa-caret-up" aria-hidden="true"></i>
+<span class="wpdiscuz-sort-button wpdiscuz-date-sort-desc">newest</span> <i class="fas fa-caret-up" aria-hidden="true"></i>
+<span class="wpdiscuz-sort-button wpdiscuz-date-sort-asc">oldest</span>
+<i class="fas fa-caret-up" aria-hidden="true"></i> <span class="wpdiscuz-sort-button wpdiscuz-vote-sort-up">most voted</span>
+</div>
+<div class="clearfix"></div>
+</div>
+<div id="wcThreadWrapper" class="wc-thread-wrapper">
+<div id="wc-comm-784_0" class="wc-comment wc-blog-guest wc_comment_level-1"><div class="wc-comment-left "><div class="wpd-xborder"></div><img alt="Jay" src="https://secure.gravatar.com/avatar/5aa8c780dc7b1d3e4219b5ea55ed5d05?s=64&#038;d=wavatar&#038;r=g" class="avatar avatar-64 photo jetpack-lazy-image" height="64" width="64" data-lazy-srcset="https://secure.gravatar.com/avatar/5aa8c780dc7b1d3e4219b5ea55ed5d05?s=128&#038;d=wavatar&#038;r=g 2x" data-lazy-src="https://secure.gravatar.com/avatar/5aa8c780dc7b1d3e4219b5ea55ed5d05?s=64&amp;is-pending-load=1#038;d=wavatar&#038;r=g" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"><noscript><img alt='Jay' src='https://secure.gravatar.com/avatar/5aa8c780dc7b1d3e4219b5ea55ed5d05?s=64&#038;d=wavatar&#038;r=g' srcset='https://secure.gravatar.com/avatar/5aa8c780dc7b1d3e4219b5ea55ed5d05?s=128&#038;d=wavatar&#038;r=g 2x' class='avatar avatar-64 photo' height='64' width='64' /></noscript><div class="wc-blog-guest wc-comment-label"><span>Guest</span></div></div><div id="comment-784" class="wc-comment-right "><div class="wc-comment-header"><div class="wc-comment-author ">Jay</div><div class="wc-comment-link"><span class="wc-comment-img-link-wrap"><i class="fas fa-link wc-comment-img-link wpf-cta" aria-hidden="true" /></i><span><input type="text" class="wc-comment-link-input" value="https://www.techiedelight.com/quicksort/#comment-784" /></span></span></div><div class="wpdiscuz_clear"></div></div><div class="wc-comment-text"><p>Quicksort is a beautiful algorithm..</p>
+</div><div class="wc-comment-footer"><div class="wc-footer-left"><span class="wc-vote-link wc-up  wc_vote wc_not_clicked"><i class="fas fa-thumbs-up wc-vote-img-up"></i><span>Vote Up</span></span><span class="wc-vote-result">2</span><span class="wc-vote-link wc-down  wc_vote wc_not_clicked"><i class="fas fa-thumbs-down wc-vote-img-down"></i><span>Vote Down</span></span>&nbsp;<span class="wc-reply-button wc-cta-button" title="Reply"><i class="fas fa-reply" aria-hidden="true"></i> Reply</span></div><div class="wc-footer-right"><div class="wc-comment-date"><i class="far fa-clock" aria-hidden="true"></i>2 years ago</div><div class="wc-toggle"></div></div><div class="wpdiscuz_clear"></div></div></div><div class="wpdiscuz-comment-message"></div><div id="wpdiscuz_form_anchor-784_0" style="clear:both"></div></div><div id="wc-comm-1132_0" class="wc-comment  wpdiscuz-root-comment  wc-blog-guest wc_comment_level-1"><div class="wc-comment-left "><div class="wpd-xborder"></div><img alt="Abhishek Yadav" src="https://secure.gravatar.com/avatar/f1b2833f839cf5cebff89fc1493ed7bd?s=64&#038;d=wavatar&#038;r=g" class="avatar avatar-64 photo jetpack-lazy-image" height="64" width="64" data-lazy-srcset="https://secure.gravatar.com/avatar/f1b2833f839cf5cebff89fc1493ed7bd?s=128&#038;d=wavatar&#038;r=g 2x" data-lazy-src="https://secure.gravatar.com/avatar/f1b2833f839cf5cebff89fc1493ed7bd?s=64&amp;is-pending-load=1#038;d=wavatar&#038;r=g" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"><noscript><img alt='Abhishek Yadav' src='https://secure.gravatar.com/avatar/f1b2833f839cf5cebff89fc1493ed7bd?s=64&#038;d=wavatar&#038;r=g' srcset='https://secure.gravatar.com/avatar/f1b2833f839cf5cebff89fc1493ed7bd?s=128&#038;d=wavatar&#038;r=g 2x' class='avatar avatar-64 photo' height='64' width='64' /></noscript><div class="wc-blog-guest wc-comment-label"><span>Guest</span></div></div><div id="comment-1132" class="wc-comment-right "><div class="wc-comment-header"><div class="wc-comment-author ">Abhishek Yadav</div><div class="wc-comment-link"><span class="wc-comment-img-link-wrap"><i class="fas fa-link wc-comment-img-link wpf-cta" aria-hidden="true" /></i><span><input type="text" class="wc-comment-link-input" value="https://www.techiedelight.com/quicksort/#comment-1132" /></span></span></div><div class="wpdiscuz_clear"></div></div><div class="wc-comment-text"><p>Nice</p>
+</div><div class="wc-comment-footer"><div class="wc-footer-left"><span class="wc-vote-link wc-up  wc_vote wc_not_clicked"><i class="fas fa-thumbs-up wc-vote-img-up"></i><span>Vote Up</span></span><span class="wc-vote-result">2</span><span class="wc-vote-link wc-down  wc_vote wc_not_clicked"><i class="fas fa-thumbs-down wc-vote-img-down"></i><span>Vote Down</span></span>&nbsp;<span class="wc-reply-button wc-cta-button" title="Reply"><i class="fas fa-reply" aria-hidden="true"></i> Reply</span></div><div class="wc-footer-right"><div class="wc-comment-date"><i class="far fa-clock" aria-hidden="true"></i>1 year ago</div><div class="wc-toggle"><i class="fas fa-chevron-up" title="Hide Replies"></i></div></div><div class="wpdiscuz_clear"></div></div></div><div class="wpdiscuz-comment-message"></div><div id="wpdiscuz_form_anchor-1132_0" style="clear:both"></div><div id="wc-comm-2478_1132" class="wc-comment wc-reply wc-blog-guest wc_comment_level-2"><div class="wc-comment-left "><div class="wpd-xborder"></div><img alt="sahithi" src="https://secure.gravatar.com/avatar/db1a61cc419ceaafb788a657cd7c518d?s=64&#038;d=wavatar&#038;r=g" class="avatar avatar-64 photo jetpack-lazy-image" height="64" width="64" data-lazy-srcset="https://secure.gravatar.com/avatar/db1a61cc419ceaafb788a657cd7c518d?s=128&#038;d=wavatar&#038;r=g 2x" data-lazy-src="https://secure.gravatar.com/avatar/db1a61cc419ceaafb788a657cd7c518d?s=64&amp;is-pending-load=1#038;d=wavatar&#038;r=g" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"><noscript><img alt='sahithi' src='https://secure.gravatar.com/avatar/db1a61cc419ceaafb788a657cd7c518d?s=64&#038;d=wavatar&#038;r=g' srcset='https://secure.gravatar.com/avatar/db1a61cc419ceaafb788a657cd7c518d?s=128&#038;d=wavatar&#038;r=g 2x' class='avatar avatar-64 photo' height='64' width='64' /></noscript><div class="wc-blog-guest wc-comment-label"><span>Guest</span></div></div><div id="comment-2478" class="wc-comment-right "><div class="wc-comment-header"><div class="wc-comment-author ">sahithi</div><div class="wc-comment-link"><span class="wc-comment-img-link-wrap"><i class="fas fa-link wc-comment-img-link wpf-cta" aria-hidden="true" /></i><span><input type="text" class="wc-comment-link-input" value="https://www.techiedelight.com/quicksort/#comment-2478" /></span></span></div><div class="wpdiscuz_clear"></div></div><div class="wc-comment-text"><p>very interesting</p>
+</div><div class="wc-comment-footer"><div class="wc-footer-left"><span class="wc-vote-link wc-up  wc_vote wc_not_clicked"><i class="fas fa-thumbs-up wc-vote-img-up"></i><span>Vote Up</span></span><span class="wc-vote-result">1</span><span class="wc-vote-link wc-down  wc_vote wc_not_clicked"><i class="fas fa-thumbs-down wc-vote-img-down"></i><span>Vote Down</span></span>&nbsp;<span class="wc-reply-button wc-cta-button" title="Reply"><i class="fas fa-reply" aria-hidden="true"></i> Reply</span></div><div class="wc-footer-right"><div class="wc-comment-date"><i class="far fa-clock" aria-hidden="true"></i>8 months ago</div><div class="wc-toggle"></div></div><div class="wpdiscuz_clear"></div></div></div><div class="wpdiscuz-comment-message"></div><div id="wpdiscuz_form_anchor-2478_1132" style="clear:both"></div></div></div>
+<div class="wpdiscuz-comment-pagination">
+</div>
+</div>
+<div class="wpdiscuz_clear"></div>
+</div>
+</div>
+<div id="wpdiscuz-loading-bar" class="wpdiscuz-loading-bar wpdiscuz-loading-bar-unauth"></div>
+</div>
+</main>
+<div id="sidebar-primary">
+<aside class="sidebar">
+<section id="custom_html-4" class="widget_text widget widget_custom_html"><div class="textwidget custom-html-widget"><script>
+  (function() {
+    var cx = '003960681063180262329:qfamh9yqeji';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+<div id=bsa-zone_1571848001298-1_123456></div>
+<br /><hr />
+
+<div id=bsa-zone_1571848083533-3_123456></div></div></section><section id="tag_cloud-7" class="widget widget_tag_cloud"><h3 class="widget-title">Browse</h3><div class="tagcloud"><a href="https://www.techiedelight.com/Tags/adobe/" class="tag-cloud-link tag-link-18 tag-link-position-1" style="font-size: 13.583333333333pt;" aria-label="Adobe (27 items)">Adobe</a>
+<a href="https://www.techiedelight.com/Tags/algorithm/" class="tag-cloud-link tag-link-19 tag-link-position-2" style="font-size: 18.916666666667pt;" aria-label="Algorithm (121 items)">Algorithm</a>
+<a href="https://www.techiedelight.com/Tags/amazon/" class="tag-cloud-link tag-link-20 tag-link-position-3" style="font-size: 18.916666666667pt;" aria-label="Amazon (121 items)">Amazon</a>
+<a href="https://www.techiedelight.com/Tags/bfs/" class="tag-cloud-link tag-link-21 tag-link-position-4" style="font-size: 12.5pt;" aria-label="BFS (20 items)">BFS</a>
+<a href="https://www.techiedelight.com/Tags/binary-search/" class="tag-cloud-link tag-link-79 tag-link-position-5" style="font-size: 12.166666666667pt;" aria-label="Binary Search (18 items)">Binary Search</a>
+<a href="https://www.techiedelight.com/Tags/bit-hacks/" class="tag-cloud-link tag-link-23 tag-link-position-6" style="font-size: 14.166666666667pt;" aria-label="Bit Hacks (32 items)">Bit Hacks</a>
+<a href="https://www.techiedelight.com/Tags/dfs/" class="tag-cloud-link tag-link-29 tag-link-position-7" style="font-size: 14.083333333333pt;" aria-label="DFS (31 items)">DFS</a>
+<a href="https://www.techiedelight.com/Tags/fifo/" class="tag-cloud-link tag-link-31 tag-link-position-8" style="font-size: 15.083333333333pt;" aria-label="FIFO (42 items)">FIFO</a>
+<a href="https://www.techiedelight.com/Tags/google/" class="tag-cloud-link tag-link-34 tag-link-position-9" style="font-size: 9.4166666666667pt;" aria-label="Google (8 items)">Google</a>
+<a href="https://www.techiedelight.com/Tags/greedy/" class="tag-cloud-link tag-link-35 tag-link-position-10" style="font-size: 9.4166666666667pt;" aria-label="Greedy (8 items)">Greedy</a>
+<a href="https://www.techiedelight.com/Tags/hashing/" class="tag-cloud-link tag-link-36 tag-link-position-11" style="font-size: 17.833333333333pt;" aria-label="Hashing (90 items)">Hashing</a>
+<a href="https://www.techiedelight.com/Tags/intro/" class="tag-cloud-link tag-link-40 tag-link-position-12" style="font-size: 15pt;" aria-label="Intro (41 items)">Intro</a>
+<a href="https://www.techiedelight.com/Tags/json/" class="tag-cloud-link tag-link-87 tag-link-position-13" style="font-size: 8pt;" aria-label="JSON (5 items)">JSON</a>
+<a href="https://www.techiedelight.com/Tags/lcs/" class="tag-cloud-link tag-link-41 tag-link-position-14" style="font-size: 10.166666666667pt;" aria-label="LCS (10 items)">LCS</a>
+<a href="https://www.techiedelight.com/Tags/lifo/" class="tag-cloud-link tag-link-42 tag-link-position-15" style="font-size: 15.166666666667pt;" aria-label="LIFO (43 items)">LIFO</a>
+<a href="https://www.techiedelight.com/Tags/maze/" class="tag-cloud-link tag-link-43 tag-link-position-16" style="font-size: 9.4166666666667pt;" aria-label="Maze (8 items)">Maze</a>
+<a href="https://www.techiedelight.com/Tags/memoization/" class="tag-cloud-link tag-link-44 tag-link-position-17" style="font-size: 14.583333333333pt;" aria-label="Memoized (36 items)">Memoized</a>
+<a href="https://www.techiedelight.com/Tags/microsoft/" class="tag-cloud-link tag-link-45 tag-link-position-18" style="font-size: 15.666666666667pt;" aria-label="Microsoft (49 items)">Microsoft</a>
+<a href="https://www.techiedelight.com/Tags/must-know/" class="tag-cloud-link tag-link-47 tag-link-position-19" style="font-size: 15.083333333333pt;" aria-label="Must Know (42 items)">Must Know</a>
+<a href="https://www.techiedelight.com/Tags/priority-queue/" class="tag-cloud-link tag-link-66 tag-link-position-20" style="font-size: 12pt;" aria-label="Priority Queue (17 items)">Priority Queue</a>
+<a href="https://www.techiedelight.com/Tags/probability/" class="tag-cloud-link tag-link-97 tag-link-position-21" style="font-size: 9.8333333333333pt;" aria-label="Probability (9 items)">Probability</a>
+<a href="https://www.techiedelight.com/Tags/recursion/" class="tag-cloud-link tag-link-51 tag-link-position-22" style="font-size: 22pt;" aria-label="Recursive (288 items)">Recursive</a>
+<a href="https://www.techiedelight.com/Tags/searching/" class="tag-cloud-link tag-link-72 tag-link-position-23" style="font-size: 15.666666666667pt;" aria-label="Searching (49 items)">Searching</a>
+<a href="https://www.techiedelight.com/Tags/sliding-window/" class="tag-cloud-link tag-link-52 tag-link-position-24" style="font-size: 10.75pt;" aria-label="Sliding Window (12 items)">Sliding Window</a>
+<a href="https://www.techiedelight.com/Tags/tabulation/" class="tag-cloud-link tag-link-55 tag-link-position-25" style="font-size: 16.333333333333pt;" aria-label="Tabulation (59 items)">Tabulation</a>
+<a href="https://www.techiedelight.com/Tags/tricky/" class="tag-cloud-link tag-link-74 tag-link-position-26" style="font-size: 14.583333333333pt;" aria-label="Tricky (36 items)">Tricky</a>
+<a href="https://www.techiedelight.com/Tags/trie/" class="tag-cloud-link tag-link-57 tag-link-position-27" style="font-size: 10.75pt;" aria-label="Trie (12 items)">Trie</a></div>
+</section><section id="custom_html-9" class="widget_text widget widget_custom_html"><div class="textwidget custom-html-widget">
+<div id=bsa-zone_1574193460873-5_123456></div>
+
+
+
+</div></section><section id="blog_subscription-7" class="widget widget_blog_subscription jetpack_subscription_widget"><h3 class="widget-title">Subscribe to posts</h3>
+<form action="#" method="post" accept-charset="utf-8" id="subscribe-blog-blog_subscription-7">
+<div id="subscribe-text"><p>Enter your email address to subscribe to new posts and receive notifications of new posts by email.</p>
+</div> <p id="subscribe-email">
+<label id="jetpack-subscribe-label" class="screen-reader-text" for="subscribe-field-blog_subscription-7">
+Email Address </label>
+<input type="email" name="email" required="required" class="required" value="" id="subscribe-field-blog_subscription-7" placeholder="Email Address" />
+</p>
+<p id="subscribe-submit">
+<input type="hidden" name="action" value="subscribe" />
+<input type="hidden" name="source" value="https://www.techiedelight.com/quicksort/" />
+<input type="hidden" name="sub-type" value="widget" />
+<input type="hidden" name="redirect_fragment" value="blog_subscription-7" />
+<button type="submit" name="jetpack_subscriptions_widget">
+Subscribe </button>
+</p>
+</form>
+</section><section id="custom_html-16" class="widget_text widget widget_custom_html"><div class="textwidget custom-html-widget">
+<div id=bsa-zone_1574193334127-5_123456></div></div></section><section id="eu_cookie_law_widget-5" class="widget widget_eu_cookie_law_widget"><div class="hide-on-button" data-hide-timeout="30" data-consent-expiration="180" id="eu-cookie-law">
+<form method="post">
+<input type="submit" value="Close and accept" class="accept" />
+</form>
+This website uses cookies. By using this site you agree to the use of cookies, our policies, copyright terms and other conditions. Read our
+<a href="https://www.techiedelight.com/privacy-policy/">
+Privacy Policy	</a>
+</div>
+</section><section id="custom_html-14" class="widget_text widget widget_custom_html"><div class="textwidget custom-html-widget"><script src="//m.servedby-buysellads.com/monetization.js" type="text/javascript"></script>
+<script>
+(function(){
+	if(typeof _bsa !== 'undefined' && _bsa) {
+  		// format, zoneKey, segment:value, options
+  		_bsa.init('stickybox', 'CK7D5K7I', 'placement:techiedelightcom');
+  	}
+})();
+</script>
+<script src="//m.servedby-buysellads.com/monetization.js" type="text/javascript"></script>
+<script>
+(function(){
+  if(typeof _bsa !== 'undefined' && _bsa) {
+    _bsa.init('fancybar', 'CE7DPK3N', 'placement:wwwtechiedelightcom');
+  }
+})();
+</script>
+
+<script type="text/javascript">(function(){var bsa_optimize=document.createElement('script');bsa_optimize.type='text/javascript';bsa_optimize.async=true;bsa_optimize.src='https://cdn-s2s.buysellads.net/pub/techiedelight.js?'+(new Date()-new Date()%3600000);(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(bsa_optimize);})();</script>
+<script data-ad-client="ca-pub-8369054522516884" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script></div></section>
+</aside>
+</div>
+</div>
+</div>
+</div>
+<footer style="background-color: #f7f7f7; border-top: 1px solid #ccc; height:52px; padding-top: 12px;" id="footer">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://www.techiedelight.com/">Techie Delight</a> &copy; 2020&nbsp;&nbsp;All Rights Reserved. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://www.techiedelight.com/privacy-policy/">Privacy Policy</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://www.techiedelight.com/contact/">Contact us</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</footer>
+<style>
+body{
+-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;-o-user-select: none;user-select: none 
+}
+</style>
+<script>
+ // Disable Right Click
+ // document.oncontextmenu = new Function("return false;");
+
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-88359968-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</div>
+<script>
+		var advanced_ads_ga_UID = 'UA-88359968';
+		var advanced_ads_ga_anonymIP = true;
+advanced_ads_check_adblocker=function(t){function e(t){(window.requestAnimationFrame||window.mozRequestAnimationFrame||window.webkitRequestAnimationFrame||function(t){return setTimeout(t,16)}).call(window,t)}var n=[],a=null;return e(function(){var t=document.createElement("div");t.innerHTML="&nbsp;",t.setAttribute("class","ad_unit ad-unit text-ad text_ad pub_300x250"),t.setAttribute("style","width: 1px !important; height: 1px !important; position: absolute !important; left: 0px !important; top: 0px !important; overflow: hidden !important;"),document.body.appendChild(t),e(function(){var e=window.getComputedStyle&&window.getComputedStyle(t),o=e&&e.getPropertyValue("-moz-binding");a=e&&"none"===e.getPropertyValue("display")||"string"==typeof o&&-1!==o.indexOf("about:");for(var i=0;i<n.length;i++)n[i](a);n=[]})}),function(t){if(null===a)return void n.push(t);t(a)}}(),function(){var t=function(t,e){this.name=t,this.UID=e,this.analyticsObject=null;var n=this,a={hitType:"event",eventCategory:"Advanced Ads",eventAction:"AdBlock",eventLabel:"Yes",nonInteraction:!0,transport:"beacon"};this.analyticsObject="string"==typeof GoogleAnalyticsObject&&"function"==typeof window[GoogleAnalyticsObject]&&window[GoogleAnalyticsObject],!1===this.analyticsObject?(!function(t,e,n,a,o,i,d){t.GoogleAnalyticsObject=o,t[o]=t[o]||function(){(t[o].q=t[o].q||[]).push(arguments)},t[o].l=1*new Date,i=e.createElement(n),d=e.getElementsByTagName(n)[0],i.async=1,i.src="https://www.google-analytics.com/analytics.js",d.parentNode.insertBefore(i,d)}(window,document,"script",0,"_advads_ga"),_advads_ga("create",n.UID,"auto",this.name),advanced_ads_ga_anonymIP&&_advads_ga("set","anonymizeIp",!0),_advads_ga(n.name+".send",a)):(window.console&&window.console.log("Advanced Ads Analytics >> using other's variable named `"+GoogleAnalyticsObject+"`"),window[GoogleAnalyticsObject]("create",n.UID,"auto",this.name),window[GoogleAnalyticsObject]("set","anonymizeIp",!0),window[GoogleAnalyticsObject](n.name+".send",a))};advanced_ads_check_adblocker(function(e){e&&"string"==typeof advanced_ads_ga_UID&&advanced_ads_ga_UID&&new t("advadsTracker",advanced_ads_ga_UID)})}();</script><a rel="nofollow" style="display:none;" href="https://www.techiedelight.com/?blackhole=bf58de06ce" title="Blackhole for Bad Bots">Do NOT follow this link or you will be banned from the site!</a>
+<script type="text/javascript">
+		window.WPCOM_sharing_counts = {"https:\/\/www.techiedelight.com\/quicksort\/":6917};
+	</script>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+<div id="fb-root"></div>
+<script>(function(d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&appId=249643311490&version=v2.3'; fjs.parentNode.insertBefore(js, fjs); }(document, 'script', 'facebook-jssdk'));</script>
+<script>
+			jQuery( document.body ).on( 'post-load', function() {
+				if ( 'undefined' !== typeof FB ) {
+					FB.XFBML.parse();
+				}
+			} );
+			</script>
+<script type="text/javascript">
+			jQuery( document ).ready( function() {
+				jQuery.getScript( 'https://platform.linkedin.com/in.js?async=true', function success() {
+					IN.init();
+				});
+			});
+			jQuery( document.body ).on( 'post-load', function() {
+				if ( typeof IN != 'undefined' )
+					IN.parse();
+			});
+			</script> <script>
+		// Don't use Pocket's default JS as it we need to force init new Pocket share buttons loaded via JS.
+		function jetpack_sharing_pocket_init() {
+			jQuery.getScript( 'https://widgets.getpocket.com/v1/j/btn.js?v=1' );
+		}
+		jQuery( document ).ready( jetpack_sharing_pocket_init );
+		jQuery( document.body ).on( 'post-load', jetpack_sharing_pocket_init );
+		</script>
+<script>
+				(function(r, d, s) {
+					r.loadSkypeWebSdkAsync = r.loadSkypeWebSdkAsync || function(p) {
+							var js, sjs = d.getElementsByTagName(s)[0];
+							if (d.getElementById(p.id)) { return; }
+							js = d.createElement(s);
+							js.id = p.id;
+							js.src = p.scriptToLoad;
+							js.onload = p.callback
+							sjs.parentNode.insertBefore(js, sjs);
+						};
+					var p = {
+						scriptToLoad: 'https://swx.cdn.skype.com/shared/v/latest/skypewebsdk.js',
+						id: 'skype_web_sdk'
+					};
+					r.loadSkypeWebSdkAsync(p);
+				})(window, document, 'script');
+			</script>
+<link rel='stylesheet' id='tabby-css' href='https://www.techiedelight.com/wp-content/plugins/tabby-responsive-tabs/css/tabby.css?v=1.3&#038;ver=1.2.3' type='text/css' media='all' />
+<link rel='stylesheet' id='tabby-print-css' href='https://www.techiedelight.com/wp-content/plugins/tabby-responsive-tabs/css/tabby-print.css' type='text/css' media='all' />
+<script type='text/javascript'>
+/* <![CDATA[ */
+var CrayonSyntaxSettings = {"version":"_2.7.2_beta","is_admin":"0","ajaxurl":"https:\/\/www.techiedelight.com\/wp-admin\/admin-ajax.php","prefix":"crayon-","setting":"crayon-setting","selected":"crayon-setting-selected","changed":"crayon-setting-changed","special":"crayon-setting-special","orig_value":"data-orig-value","debug":""};
+var CrayonSyntaxStrings = {"copy":"Press %s to Copy","minimize":"Click To Expand Code"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.techiedelight.com/wp-content/plugins/crayon-syntax-highlighter/js/min/crayon.min.js'></script>
+<script type='text/javascript' src='https://c0.wp.com/c/5.3.2/wp-includes/js/comment-reply.min.js'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var ratingsL10n = {"plugin_url":"https:\/\/www.techiedelight.com\/wp-content\/plugins\/wp-postratings","ajax_url":"https:\/\/www.techiedelight.com\/wp-admin\/admin-ajax.php","text_wait":"Please rate only 1 item at a time.","image":"stars","image_ext":"gif","max":"5","show_loading":"1","show_fading":"1","custom":"0"};
+var ratings_mouseover_image=new Image();ratings_mouseover_image.src="https://www.techiedelight.com/wp-content/plugins/wp-postratings/images/stars/rating_over.gif";;
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.techiedelight.com/wp-content/plugins/wp-postratings/js/postratings-js.js'></script>
+<script type='text/javascript' src='https://c0.wp.com/c/5.3.2/wp-includes/js/jquery/jquery.form.min.js'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var quicktagsL10n = {"closeAllOpenTags":"Close all open tags","closeTags":"close tags","enterURL":"Enter the URL","enterImageURL":"Enter the URL of the image","enterImageDescription":"Enter a description of the image","textdirection":"text direction","toggleTextdirection":"Toggle Editor Text Direction","dfw":"Distraction-free writing mode","strong":"Bold","strongClose":"Close bold tag","em":"Italic","emClose":"Close italic tag","link":"Insert link","blockquote":"Blockquote","blockquoteClose":"Close blockquote tag","del":"Deleted text (strikethrough)","delClose":"Close deleted text tag","ins":"Inserted text","insClose":"Close inserted text tag","image":"Insert image","ul":"Bulleted list","ulClose":"Close bulleted list tag","ol":"Numbered list","olClose":"Close numbered list tag","li":"List item","liClose":"Close list item tag","code":"Code","codeClose":"Close code tag","more":"Insert Read More tag"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://c0.wp.com/c/5.3.2/wp-includes/js/quicktags.min.js'></script>
+<script type='text/javascript' src='https://www.techiedelight.com/wp-content/plugins/wpdiscuz/assets/third-party/quicktags/wpdiscuz-quictags.js'></script>
+<script type='text/javascript' src='https://www.techiedelight.com/wp-content/themes/nevertheless/assets/js/jquery.fitvids.min.js'></script>
+<script type='text/javascript' src='https://www.techiedelight.com/wp-content/themes/nevertheless/assets/js/jquery.theme.js'></script>
+<script type='text/javascript' src='https://c0.wp.com/p/jetpack/8.3/_inc/build/widgets/eu-cookie-law/eu-cookie-law.min.js'></script>
+<script type='text/javascript' src='https://c0.wp.com/p/jetpack/8.3/_inc/build/lazy-images/js/lazy-images.min.js'></script>
+<script type='text/javascript' src='https://c0.wp.com/c/5.3.2/wp-includes/js/wp-embed.min.js'></script>
+<script type='text/javascript' src='https://www.techiedelight.com/wp-content/plugins/tabby-responsive-tabs/js/tabby.js'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var sharing_js_options = {"lang":"en","counts":"1","is_stats_active":"1"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://c0.wp.com/p/jetpack/8.3/_inc/build/sharedaddy/sharing.min.js'></script>
+<script type='text/javascript'>
+var windowOpen;
+			jQuery( document.body ).on( 'click', 'a.share-facebook', function() {
+				// If there's another sharing window open, close it.
+				if ( 'undefined' !== typeof windowOpen ) {
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery( this ).attr( 'href' ), 'wpcomfacebook', 'menubar=1,resizable=1,width=600,height=400' );
+				return false;
+			});
+var windowOpen;
+			jQuery( document.body ).on( 'click', 'a.share-telegram', function() {
+				// If there's another sharing window open, close it.
+				if ( 'undefined' !== typeof windowOpen ) {
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery( this ).attr( 'href' ), 'wpcomtelegram', 'menubar=1,resizable=1,width=450,height=450' );
+				return false;
+			});
+</script>
+<script>jQuery(document).ready(function($) { RESPONSIVEUI.responsiveTabs(); })</script>
+<script type='text/javascript' src='https://stats.wp.com/e-202016.js' async='async' defer='defer'></script>
+<script type='text/javascript'>
+	_stq = window._stq || [];
+	_stq.push([ 'view', {v:'ext',j:'1:8.3',blog:'120308644',post:'6917',tz:'5.5',srv:'www.techiedelight.com'} ]);
+	_stq.push([ 'clickTrackerInit', '120308644', '6917' ]);
+</script>
+</body>
+</html>
+
