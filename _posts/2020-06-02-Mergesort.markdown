@@ -1,7 +1,7 @@
 ---
 layout:         post
 title:          "Mergesort, Explained"
-date:           2020-06-02 17:53:12 -0500
+date:           2020-06-01 17:53:12 -0500
 categories:     jekyll update
 ---
 
@@ -9,9 +9,11 @@ categories:     jekyll update
 <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 <div style="font-family: Quicksand, sans-serif; ">
   <h1 style="font-size: 40px;"> Mergesort: the Algorithm </h1>
-  Sorting algorithms are so important that I though it would be worth it to take a look at a very common and efficient sorting algorithm: Mergesort. Merge sort is a divide-and-conquer algorithm. By that, we mean that we divide the problem into many subproblems, and then combine the solutions to these subproblems in order to get the solution to our initial problem. If that doesn't make much sense, let's get right into it.
+  Sorting algorithms are so important that I thought it would be worth it to take a look at a very common and efficient sorting algorithm: Mergesort. Mergesort is a divide-and-conquer algorithm. By that, we mean that we divide the problem into many subproblems, and then combine the solutions to these subproblems in order to get the solution to our initial problem. If that doesn't make much sense, let's get right into it.
 
-  Suppose we want to sort the following array of numbers: [5, 2, 4, 7, 1, 3, 2, 6]
+  Suppose we want to sort the following array of numbers: [5, 2, 4, 7, 1, 3, 2, 6].
+
+  <br/>
 
   The merge sort algorithm is recursive, so what it says is: divide this list into two sorted arrays (each of length half the original array), and then merge them such that you get a sorted array.
 
