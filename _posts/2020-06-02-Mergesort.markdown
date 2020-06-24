@@ -132,7 +132,7 @@ categories:     jekyll update
   We can solve this recurrence in many ways, one of which is by using the <a href="https://brilliant.org/wiki/master-theorem/" target="_blank"> Master Theorem</a>. Here's a good link that explains it. The biggest part of the work is coming up with the recurrence relation, so I won't go through explaining the master theorem right now (let me know if you'd like me to make a blog post about it). Anyways, when you apply the theorem, you find that the runtime is indeed <script type="math/tex">O(n\log(n))</script>
 
   <h1>Summary</h1>
-  We have just explained the mergesort algorithm, and we have shown that is runs in <script type="math/tex">O(n\log(n))</script> time. This is a huge improvement from the more intuitive algorithms such as insertion sort, which runs in <script type="math/tex">O(${n}^2)</script>
+  We have just explained the mergesort algorithm, and we have shown that is runs in <script type="math/tex">O(n\log(n))</script> time. This is a huge improvement from the more intuitive algorithms such as insertion sort, which runs in <script type="math/tex">O({n}^2)</script>
 
 
 </div>
