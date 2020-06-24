@@ -14,9 +14,9 @@ categories:     jekyll update
   Suppose we want to sort the following array of numbers: [5, 2, 4, 7, 1, 3, 2, 6].
 
 
-  The merge sort algorithm is recursive, so what it says is: divide this list into two sorted arrays (each of length half the original array), and then merge them such that you get a sorted array.
+  The merge sort algorithm is recursive, so what it does is: divide this list into two sorted arrays (each of length half the original array), and then merge them such that you get a sorted array.
 
-  Here's the pseudocode:
+  Here's the pseudocode: (A is the array we are sorting, p is the index of the start of the array, and r is the last index)
   {% highlight pseudo %}
   Mergesort(A, p, r)
     q = (p + r)/2
@@ -24,8 +24,9 @@ categories:     jekyll update
     mergesort(A, q+1, r)
     merge(A, p, q, r)
   {% endhighlight %}
-
-  Now you might ask, how can you divide this unsorted array into 2 sorted array? Well, the answer is that right away, you can't. This is why you divide the array into two "unsorted" sub-arrays and apply mergesort to each of these two sub-arrays.
+  Hence, we find the middle index q, and use it as the last index of the first half of the array.
+  <br/> <br/>
+  Now you might ask, how can you divide this unsorted array into 2 sorted array? Well, the answer is that right away, you can't. You are actually dividing the array into two "unsorted" sub-arrays and applying mergesort to each of these two sub-arrays.
 
   Hence, you divide each of the two sub-arrays again. You keep doing that until you are left with only arrays of length 1. The process looks like this:
   <br>
@@ -39,7 +40,7 @@ categories:     jekyll update
 
 
 
-  Then, once we have reached the stage where we have a bunch of arrays of size 1, we can start merging them, all the way up, until we get our sorted array. If this sounds unclear, take a look at the following picture:
+  Then, once we have reached the stage where we have a bunch of arrays of size 1, we can start merging them, all the way up, until we get our sorted array. As we merge these sorted arrays, we have to make sure that the result is also sorted. We can't merge them as we please. We will go into that later as we describe the merge algorithm. If the greater picture sounds unclear, take a look at the following diagram:
 
 
   <br>
@@ -49,8 +50,10 @@ categories:     jekyll update
   <br>
   <br>
 
-
-  Here's the C++ code that does the same thing for the vector v:
+  As you can see here, as we merge the sorted arrays, we make sure to get a sorted results.
+  <br>
+  <br>
+  Here's the C++ code that does applies mergesort to a vector v:
   {% highlight C++ %}
   std::vector<int> sort(std::vector<int> v, int l, int r) {
     // base case: if you reach a vector of size 1, just return this vector as it is already sorted.
@@ -73,7 +76,7 @@ categories:     jekyll update
 
   <h1 style="font-size: 40px;"> Merge </h1>
 
-  Now that we have the code for mergesort, you might already have noticed that we still have to write our merge function. The merge function should take two sorted arrays as its argument, and it should return a sorted array that combines all the elements in the two arrays. Here's the strategy we will use: Suppose our two arrays are called a and b. We will set two counters, i and j, and initially, they will point to the start of arrays a and b respectively. Then, we will check: which index points to the greater element? We will pick that element and add it to the start of our new array v, and we will increment the counter (i or j) that pointed to that element. We will keep doing this, until one of our counters has reached the length of our array. In this case, we have added all the elements of one array to our resulting array v. Hence, we are left with the rest of the elements of the second array. Since it is sorted, we can add them sequentially to our resulting array v. Here is the C++ code form merge:
+  Now that we have the code for mergesort, it's time to write our merge function. The merge function should take two sorted arrays as its argument, and it should return a sorted array that combines all the elements in the two arrays. It is very important to remember that the to input arrays are sorted. This will be cruicial in the design of this algorithm. Here's the strategy we will use: Suppose our two arrays are called a and b. We will set two counters, i and j, and initially, they will point to the start of the arrays a and b respectively. Then, we will check: which index points to the greater element? We will pick that element and add it to the start of our new array v, and we will increment the counter (i or j) that pointed to that element. We will keep doing this, until one of our counters has reached the length of our array. In this case, we have added all the elements of one of the arrays a and b to our resulting array v. Hence, we are left with the rest of the elements of the second array. Since this array is sorted, we can add its elements sequentially to our resulting array v. Here is the C++ code form merge:
 
   {% highlight C++ %}
   vector<int> merge(std::vector<int> a, std::vector<int> b) {
@@ -111,11 +114,11 @@ categories:     jekyll update
 
   <h1 style="font-size: 40px;"> Runtime Analysis </h1>
   <h1>Using intuition</h1>
-  We can derive the run time of merge sort in many ways, but we will first start with the most intuitive one. If we look at the first tree we drew, what is its height? The 0th level is the root, and the levels go up to 3. You might have noticed we have 8 elements in the array. The number of levels in our tree is <script type="math/tex">\log(8)</script>. As a general rule, for an array of <script type="math/tex">n</script> elements, we will have a tree of height <script type="math/tex">\log(n)</script>.
+  We can derive the run time of merge sort in many ways, but we will first start with the most intuitive one. If we look at the first tree we drew, what is its height? The 0th level is the root, and the levels go up to 3. You might have noticed we have 8 elements in the array. The height of our tree is <script type="math/tex">\log(8)</script>. As a general rule, for an array of <script type="math/tex">n</script> elements, we will have a tree of height <script type="math/tex">\log(n)</script>, and hence <script type="math/tex">\log(n) + 1</script> levels.
   <br><br>
   Now, for each of these levels, we have to go through every array at this level to perform merge. At level 0, we don't do anything because the array is sorted and we're done. At level 1, we have to merge 2 arrays of length <script type="math/tex">n/2</script> each, which means we have to perform <script type="math/tex">n</script> operations. At level 2, we have to merge 2 sets of 2 arrays each. That means we have to go through 4 arrays of length <script type="math/tex">n/4</script> each. We hence also have to do n operations. I think you can see the trend at this point. Each level of the tree does <script type="math/tex">O(n)</script> work.
   <br><br>
-  We've said before that our algorithm has <script type="math/tex">n</script> levels. Hence, the runtime of the algorithm is <script type="math/tex">O(n\log(n))</script>
+  We've said before that our algorithm has <script type="math/tex">log(n) + 1</script> levels. Hence, the runtime of the algorithm does <script type="math/tex">n(log(n) + 1) = nlog(n) + n</script> work. The algorithm thus runs in <script type="math/tex">O(nlog(n))</script> time
   <br><br>
 
   <h1>Using Recurrence Relations</h1>
@@ -127,6 +130,9 @@ categories:     jekyll update
   Instead of <script type="math/tex">cn</script>, we could use <script type="math/tex">O(n)</script>. The sole point is that for an array of size <script type="math/tex">n</script>, we need to apply mergesort to 2 arrays of size <script type="math/tex">\frac{n}{2}</script>, which takes <script type="math/tex">2T(\frac{n}{2})</script> work, and we need to merge them, which takes <script type="math/tex">O(n)</script> work.
 
   We can solve this recurrence in many ways, one of which is by using the <a href="https://brilliant.org/wiki/master-theorem/" target="_blank"> Master Theorem</a>. Here's a good link that explains it. The biggest part of the work is coming up with the recurrence relation, so I won't go through explaining the master theorem right now (let me know if you'd like me to make a blog post about it). Anyways, when you apply the theorem, you find that the runtime is indeed <script type="math/tex">O(n\log(n))</script>
+
+  <h1>Summary</h1>
+  We have just explained the mergesort algorithm, and we have shown that is runs in <script type="math/tex">O(n\log(n))</script> time. This is a huge improvement from the more intuitive algorithms such as insertion sort, which runs in <script type="math/tex">O(${n}^2)</script>
 
 
 </div>
