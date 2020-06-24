@@ -13,7 +13,6 @@ categories:     jekyll update
 
   Suppose we want to sort the following array of numbers: [5, 2, 4, 7, 1, 3, 2, 6].
 
-  <br/>
 
   The merge sort algorithm is recursive, so what it says is: divide this list into two sorted arrays (each of length half the original array), and then merge them such that you get a sorted array.
 
