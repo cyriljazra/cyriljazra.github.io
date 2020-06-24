@@ -1,0 +1,9 @@
+I"<link href="https://fonts.googleapis.com/css2?family=Quicksand&amp;display=swap" rel="stylesheet" />
+
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+
+<div style="font-family: Quicksand, sans-serif; ">
+  <h1 style="font-size: 40px;"> Mergesort: the Algorithm </h1>
+  Sorting algorithms are so important that I though it would be worth it to take a look at a very common and efficient sorting algorithm: Mergesort. Merge sort is a divide-and-conquer algorithm. By that, we mean that we divide the problem into many subproblems, and then combine the solutions to these subproblems in order to get the solution to our initial problem. If that doesn't make much sense, let's get right into it.
+</div>
+:ET
